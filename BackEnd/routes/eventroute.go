@@ -2,9 +2,13 @@ package eventroute
 
 import (
 	controller "backend/controllers"
-	"net/http"
+
+	"github.com/gorilla/mux"
 )
 
+var Mux = mux.NewRouter()
+
 func InitEventeRoute() {
-	http.HandleFunc("/events", controller.GetEvent)
+
+	Mux.HandleFunc("/events", controller.GetEvent).Methods("GET")
 }

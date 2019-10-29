@@ -17,7 +17,7 @@ func enableCors(w *http.ResponseWriter) {
 
 func GetEvent(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
-	data, err := http.Get("http://localhost:5984/events_calendar/_all_docs?include_docs=false")
+	data, err := http.Get("http://127.0.0.1:5984/events_calendar/_all_docs?include_docs=true")
 	if err != nil {
 		log.Fatal(err)
 	}
