@@ -23,19 +23,25 @@ class EventsPage extends React.Component {
       BackgroundIntro,
       WelcomeText,
       PageContainer,
-      latestEventPos,
-      MapEventContainer
+      latestEventPos
     } = EventPageStyle;
 
     //State Data from App.js
     const { EventsData } = this.props;
+    
+    let latestEvent;
+    if(EventsData.length > 0){
+      latestEvent =  <LatestEvent Title={"POPCORN"}  />
+    }else{
+      latestEvent = <Text>Loading...</Text>
+    }
     return (
       <ScrollView style={PageContainer}>
         <View style={BackgroundIntro}>
           <Text style={WelcomeText}>Welcome back,{"\n"} William</Text>
         </View>
         <TouchableHighlight style={latestEventPos}>
-          <LatestEvent />
+          {latestEvent}
         </TouchableHighlight>
 
         <MapEvents EventsData={EventsData} />
@@ -47,33 +53,27 @@ class EventsPage extends React.Component {
 const EventPageStyle = StyleSheet.create({
   PageContainer: {
     flex: 1,
-    backgroundColor: "purple"
   },
 
   BackgroundIntro: {
     backgroundColor: "orange",
     width: "100%",
-    height: "50%"
+    height: "30%"
   },
 
   WelcomeText: {
     fontSize: 40,
     color: "white",
-    marginTop: 75,
+    marginTop: 35,
     textAlign: "center"
   },
 
   latestEventPos: {
     position: "absolute",
-    top: "30%",
-    width: "90%",
+    top: "15%",
+    width: "95%",
     height: 275,
     alignSelf: "center"
-  },
-
-  MapEventContainer: {
-    height: "100%",
-    backgroundColor: "red"
   }
 });
 

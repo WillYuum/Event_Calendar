@@ -14,7 +14,13 @@ class MapEvents extends React.Component {
     return (
       <View style={container}>
         {EventsData.map((event, index) => {
-          return <SmallEventCard key={index} Title={event.EventName} />;
+          return (
+            <SmallEventCard
+              key={index}
+              Title={event.doc.Eventname}
+              Host={event.doc.HostName.HostName}
+            />
+          );
         })}
       </View>
     );
@@ -23,8 +29,9 @@ class MapEvents extends React.Component {
 
 const MapEventsStyle = StyleSheet.create({
   container: {
-    marginTop: 150,
-    width: "90%",
+    marginTop: 130,
+    marginBottom: 130,
+    width: "95%",
     height: "100%",
     alignSelf: "center"
   }

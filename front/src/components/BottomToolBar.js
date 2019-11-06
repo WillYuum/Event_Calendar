@@ -26,7 +26,7 @@ class BottomToolBar extends React.Component {
 const ToolBar = StyleSheet.create({
   Container: {
     width: "100%",
-    height: "10%",
+    height: "7%",
     position: "absolute",
     bottom: 0,
     flexDirection: "row",

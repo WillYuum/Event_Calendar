@@ -20,8 +20,10 @@ class App extends React.Component {
       EventsData: []
     };
   }
-  componentDidMount() {
-    this.getEvents();
+
+
+  async componentDidMount() {
+    await this.getEvents();
   }
 
   getEvents = async () => {
@@ -30,7 +32,7 @@ class App extends React.Component {
         method: "GET"
       });
       const res = await req.json();
-      this.setState({ EventsData: res.rows });
+       await this.setState({ EventsData: res.rows });
     } catch (err) {
       throw new Error(`failed fetching events with = ${err}`);
     }

@@ -1,6 +1,10 @@
 import React from "react";
 import { StyleSheet, View, Image, Text } from "react-native";
 
+/**
+ * @prop {string} Title
+ * @prop {string} Host
+ */
 class LatestEvent extends React.Component {
   constructor(props) {
     super(props);
@@ -19,10 +23,12 @@ class LatestEvent extends React.Component {
       EventTitle,
       EventHost
     } = LatestEventStyle;
+
     let Image_Http_URL = {
       uri:
         "https://reactnativecode.com/wp-content/uploads/2017/05/react_thumb_install.png"
     };
+    const { Title, Host } = this.props;
     return (
       <View style={CardContainer}>
         <View style={ImageContainer}>
@@ -34,8 +40,8 @@ class LatestEvent extends React.Component {
             <Text style={EventDay}>5</Text>
           </View>
           <View style={detailsContainer}>
-            <Text style={EventTitle}>React Native!</Text>
-            <Text style={EventHost}>Willy The Chilly</Text>
+            <Text style={EventTitle}>{Title}</Text>
+            <Text style={EventHost}>by {Host}</Text>
           </View>
         </View>
       </View>
@@ -49,19 +55,17 @@ const LatestEventStyle = StyleSheet.create({
     width: "100%",
     height: "100%",
     alignSelf: "center",
-    borderWidth: 1,
     elevation: 1
   },
 
   ImageContainer: {
     width: "100%",
     height: "60%",
-    backgroundColor: "purple"
   },
 
   EventImage: {
     width: "100%",
-    height: "100%"
+    height: "100%",
   },
 
   EventInfo: {
@@ -69,8 +73,8 @@ const LatestEventStyle = StyleSheet.create({
     height: "40%",
     flexDirection: "row",
     backgroundColor: "white"
-
   },
+
   dateContainer: {
     width: "25%",
     height: "100%"

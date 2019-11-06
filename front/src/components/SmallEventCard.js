@@ -1,13 +1,20 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 
+/**
+ * @prop {string} Title
+ * @prop {string} Host
+ */
 class SmallEventCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
   render() {
-    let EventImageSrc = { uri: "https://reactnativecode.com/wp-content/uploads/2017/05/react_thumb_install.png" };
+    let EventImageSrc = {
+      uri:
+        "https://reactnativecode.com/wp-content/uploads/2017/05/react_thumb_install.png"
+    };
 
     //Styling varialbles
     const {
@@ -21,7 +28,7 @@ class SmallEventCard extends React.Component {
     } = SmallEventCardStyle;
 
     //props recieved from MapEvents.js
-    const {Title} = this.props
+    const { Title, Host } = this.props;
     return (
       <View style={containerCard}>
         <View style={ImageContainer}>
@@ -29,7 +36,7 @@ class SmallEventCard extends React.Component {
         </View>
         <View style={EventInfo}>
           <Text style={EventTitle}>{Title}</Text>
-          <Text style={EventHost}>by Willy the Chilly</Text>
+          <Text style={EventHost}>by {Host}</Text>
           <Text style={EventDate}>Thursday 12, 8, 2019</Text>
         </View>
       </View>
@@ -40,25 +47,36 @@ class SmallEventCard extends React.Component {
 const SmallEventCardStyle = StyleSheet.create({
   containerCard: {
     width: "100%",
-    height: 137.5,
+    height: 100,
     flexDirection: "row",
-    marginTop: 50
+    marginTop: 30,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5
   },
 
   ImageContainer: {
-    width: "35%",
+    width: "30%",
     height: "100%"
   },
 
   EventImage: {
     width: "100%",
-    height: "100%"
+    height: "100%",
+    resizeMode: "stretch"
   },
 
   EventInfo: {
-    width: "65%",
+    backgroundColor: "white",
+    width: "70%",
     height: "100%",
-    backgroundColor: "white"
+    padding: 10
   },
 
   EventTitle: {
