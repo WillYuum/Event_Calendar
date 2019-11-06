@@ -33,7 +33,16 @@ const MapEventsStyle = StyleSheet.create({
     marginBottom: 130,
     width: "95%",
     height: "100%",
-    alignSelf: "center"
+    alignSelf: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5
   }
 });
 

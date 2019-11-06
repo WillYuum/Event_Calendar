@@ -12,7 +12,7 @@ import LatestEvent from "../components/EventCard.js";
 import MapEvents from "../mapComponents/MapEvents.js";
 //-------------------IMPORTED COMPONENTS--------------------
 
-class EventsPage extends React.Component {
+class EventScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -28,12 +28,12 @@ class EventsPage extends React.Component {
 
     //State Data from App.js
     const { EventsData } = this.props;
-    
+
     let latestEvent;
-    if(EventsData.length > 0){
-      latestEvent =  <LatestEvent Title={"POPCORN"}  />
-    }else{
-      latestEvent = <Text>Loading...</Text>
+    if (EventsData.length > 0) {
+      latestEvent = <LatestEvent Title={"POPCORN"} />;
+    } else {
+      latestEvent = <Text>Loading...</Text>;
     }
     return (
       <ScrollView style={PageContainer}>
@@ -52,13 +52,13 @@ class EventsPage extends React.Component {
 
 const EventPageStyle = StyleSheet.create({
   PageContainer: {
-    flex: 1,
+    flex: 1
   },
 
   BackgroundIntro: {
-    backgroundColor: "orange",
+    backgroundColor: "purple",
     width: "100%",
-    height: "30%"
+    height: "40%"
   },
 
   WelcomeText: {
@@ -77,4 +77,4 @@ const EventPageStyle = StyleSheet.create({
   }
 });
 
-export default EventsPage;
+export default EventScreen;

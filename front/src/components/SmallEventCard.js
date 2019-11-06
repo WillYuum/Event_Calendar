@@ -50,15 +50,6 @@ const SmallEventCardStyle = StyleSheet.create({
     height: 100,
     flexDirection: "row",
     marginTop: 30,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5
   },
 
   ImageContainer: {

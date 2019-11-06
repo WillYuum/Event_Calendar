@@ -1,7 +1,7 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 
-class BottomToolBar extends React.Component {
+class NavigatorBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -9,15 +9,24 @@ class BottomToolBar extends React.Component {
   render() {
     return (
       <View style={ToolBar.Container}>
-        <View style={ToolBar.ButtonContainer}>
+        <Button
+          style={ToolBar.ButtonContainer}
+          onPress={() => navigate("Home", { name: "Willy" })}
+        >
           <Text style={ToolBar.PerButton}>Home</Text>
-        </View>
-        <View style={ToolBar.ButtonContainer}>
+        </Button>
+        <Button
+          style={ToolBar.ButtonContainer}
+          onPress={() => navigate("HomeScreen", { name: "Willy" })}
+        >
           <Text style={ToolBar.PerButton}>Calendar</Text>
-        </View>
-        <View style={ToolBar.ButtonContainer}>
+        </Button>
+        <Button
+          style={ToolBar.ButtonContainer}
+          onPress={() => navigate("SettingsScreen", { name: "Willy" })}
+        >
           <Text style={ToolBar.PerButton}>Options</Text>
-        </View>
+        </Button>
       </View>
     );
   }
@@ -36,17 +45,17 @@ const ToolBar = StyleSheet.create({
 
   ButtonContainer: {
     width: "33.33333%",
-    height: "100%",
+    height: "100%"
   },
 
   PerButton: {
     width: "100%",
-    height:"100%",
-    textAlign:"center",
+    height: "100%",
+    textAlign: "center",
     textAlignVertical: "center",
 
     borderTopWidth: 1
   }
 });
 
-export default BottomToolBar;
+export default NavigatorBar;

@@ -9,8 +9,8 @@ import {
 } from "react-native";
 
 //---------------------IMPORTED COMPONENTS------------------
-import EventsPage from "./src/pages/EventsPage.js";
-import BottomToolBar from "./src/components/BottomToolBar.js";
+import EventScreen from "./src/Screens/EventsScreen";
+import NavigatorBar from "./src/components/NavigatorBar.js";
 //---------------------IMPORTED COMPONENTS------------------
 
 class App extends React.Component {
@@ -20,7 +20,6 @@ class App extends React.Component {
       EventsData: []
     };
   }
-
 
   async componentDidMount() {
     await this.getEvents();
@@ -32,7 +31,7 @@ class App extends React.Component {
         method: "GET"
       });
       const res = await req.json();
-       await this.setState({ EventsData: res.rows });
+      await this.setState({ EventsData: res.rows });
     } catch (err) {
       throw new Error(`failed fetching events with = ${err}`);
     }
@@ -47,9 +46,9 @@ class App extends React.Component {
     return (
       <View style={background}>
         <View style={content}>
-            <EventsPage EventsData={EventsData} />
+          <EventScreen EventsData={EventsData} />
         </View>
-        <BottomToolBar />
+        <NavigatorBar />
       </View>
     );
   }
@@ -61,7 +60,7 @@ const AppStyle = StyleSheet.create({
   },
   content: {
     width: "100%",
-    height: "100%",
+    height: "100%"
   }
 });
 
