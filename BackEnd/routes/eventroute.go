@@ -8,7 +8,6 @@ import (
 
 var Mux = mux.NewRouter()
 
-func InitEventeRoute() {
-
+func InitEventRoute() {
 	Mux.HandleFunc("/events", controller.GetEvent).Methods("GET")
 }

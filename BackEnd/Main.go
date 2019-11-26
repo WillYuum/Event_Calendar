@@ -1,13 +1,14 @@
 package main
 
 import (
+	DB "backend/database"
 	route "backend/routes"
 	"log"
 	"net/http"
 )
 
 func main() {
-
-	route.InitEventeRoute()
+	DB.InitDB()
+	route.InitEventRoute()
 	log.Fatal(http.ListenAndServe(":3000", route.Mux))
 }
