@@ -1,21 +1,26 @@
-package Models
+package model
 
 import (
-	"backend/database"
 	"log"
+	"time"
 )
 
 type Event struct {
-	EventID   int    `json:"EventId"`
-	EventName string `json:"EventName"`
+	EventID          int       `json:"EventId"`
+	EventName        string    `json:"EventName"`
+	EventDescription string    `json:"EventDescription"`
+	HostName         string    `json:"HostName"`
+	EventStartDate   time.Time `json:"EventStartDate"`
+	EventEndDate     time.Time `json: "EventEndDate"`
 }
 type Events struct {
 	AllEvents []Event
 }
 
+// initiating + getting db functionalities
+// var db = database.InitDB()
+
 func GetEvents() Events {
-	// getting db functionalities
-	var db = database.InitDB()
 
 	events := Events{}
 
@@ -34,6 +39,10 @@ func GetEvents() Events {
 		err := rows.Scan(
 			&event.EventID,
 			&event.EventName,
+			&event.EventDescription,
+			&event.HostName,
+			&event.EventStartDate,
+			&event.EventEndDate,
 		)
 		if err != nil {
 			log.Fatal(err)
@@ -44,4 +53,8 @@ func GetEvents() Events {
 	}
 	//returning the array with all rows
 	return events
+}
+
+func CreateEvent() {
+
 }
