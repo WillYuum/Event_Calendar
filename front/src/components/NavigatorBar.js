@@ -9,7 +9,7 @@ class NavigatorBar extends React.Component {
   render() {
     return (
       <View style={ToolBar.Container}>
-        <Button
+        {/* <Button
           style={ToolBar.ButtonContainer}
           onPress={() => navigate("Home", { name: "Willy" })}
         >
@@ -26,7 +26,7 @@ class NavigatorBar extends React.Component {
           onPress={() => navigate("SettingsScreen", { name: "Willy" })}
         >
           <Text style={ToolBar.PerButton}>Options</Text>
-        </Button>
+        </Button> */}
       </View>
     );
   }

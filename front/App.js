@@ -27,7 +27,7 @@ class App extends React.Component {
 
   getEvents = async () => {
     try {
-      const req = await fetch("http://192.168.1.106:3000/events", {
+      const req = await fetch("http://192.168.0.123:3000/events", {
         method: "GET"
       });
       const res = await req.json();

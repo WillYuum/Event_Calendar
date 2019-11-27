@@ -4,11 +4,13 @@ import (
 	models "backend/models"
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
 )
 
+//list all events in data base
 func GetEvent(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 
@@ -26,6 +28,7 @@ func GetEvent(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", data)
 }
 
+//List all Events that the user will attend
 func GetAttendingEvent(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 
@@ -50,7 +53,30 @@ func GetAttendingEvent(w http.ResponseWriter, r *http.Request) {
 	}
 
 	fmt.Fprintf(w, "%s", data)
+}
 
+type AttendEventInfo struct {
+	UserId  int `json: "UserId"`
+	EventId int `json: "EventId"`
+}
+
+func AttendEvent(w http.ResponseWriter, r *http.Request) {
+	enableCors(&w)
+
+	data, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Print("data", data)
+
+	var attendEventInfo AttendEventInfo
+
+	err = json.Unmarshal(data, &attendEventInfo)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Print(attendEventInfo)
 }
 
 func enableCors(w *http.ResponseWriter) {
