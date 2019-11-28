@@ -17,5 +17,4 @@ func InitEventRoute() {
 	Mux.HandleFunc("/registertoevent", controller.AttendEvent).Methods("POST")
 	//deletes the event from the attending list
 	Mux.HandleFunc("/deleteAttendingEvent", controller.DeleteEventFromAttendingList).Methods("POST")
-
 }
