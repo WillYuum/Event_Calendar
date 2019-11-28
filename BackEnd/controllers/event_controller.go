@@ -1,4 +1,4 @@
-package event
+package controller
 
 import (
 	models "backend/models"

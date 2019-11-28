@@ -16,7 +16,6 @@ const (
 	dbname   = "Events_DB"
 )
 
-var MainDb *sql.DB
 
 func InitDB() *sql.DB {
 

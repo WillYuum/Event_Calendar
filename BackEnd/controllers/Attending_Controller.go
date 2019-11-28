@@ -1,4 +1,4 @@
-package event
+package controller
 
 import (
 	models "backend/models"
@@ -49,10 +49,7 @@ func AttendEvent(w http.ResponseWriter, r *http.Request) {
 
 	UserId := r.FormValue("UserId")
 	EventId := r.FormValue("EventId")
-
-	fmt.Println(UserId)
-	fmt.Println(EventId)
-
+	
 	models.AddEventToAttendList(UserId, EventId)
 
 }

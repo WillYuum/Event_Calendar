@@ -3,14 +3,14 @@ package model
 import (
 	"time"
 	"log"
-	"database/sql"
+	// "database/sql"
 )
 
 type Session struct{
-	SessionID     int `json: "SessionId"`
+	SessionID     int `json: "SessionID"`
 	SessionTitle     string `json: "SessionTitle"`
 	SessionDescription     string  `json: "SessionDescription"`
-	RepresentorName     sql.NullString  `json: "RepresentorName"`
+	RepresentorName     string  `json: "RepresentorName"`
 	SessionStart     time.Time `json: "SessionStart"`
 	SessionEnd     time.Time `json: "SessionEnd"`
 }
@@ -24,7 +24,7 @@ func GetSessions(EventId int) Sessions{
 	sessions := Sessions{}
 
 	//query all the rows from Sessions table
-	sqlStmt := `SELECT "SessionId", "SessionTitle", "SessionDescription", "RepresentorName", "SessionTitle", "SessionStart", "SessionEnd"
+	sqlStmt := `SELECT "SessionId", "SessionTitle", "SessionDescription", "RepresentorName", "SessionStart", "SessionEnd"
 	FROM public."Session" WHERE "EventId" = $1`
 
 	rows, err := db.Query(sqlStmt, EventId)
