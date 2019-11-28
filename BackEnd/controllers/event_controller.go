@@ -4,7 +4,6 @@ import (
 	models "backend/models"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"strconv"
@@ -63,20 +62,23 @@ type AttendEventInfo struct {
 func AttendEvent(w http.ResponseWriter, r *http.Request) {
 	enableCors(&w)
 
-	data, err := ioutil.ReadAll(r.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
+	UserId := r.FormValue("UserId")
+	EventId := r.FormValue("EventId")
 
-	fmt.Print("data", data)
+	fmt.Println(UserId)
+	fmt.Println(EventId)
 
-	var attendEventInfo AttendEventInfo
+	// models.AddEventToAttendList(UserId, EventId)
 
-	err = json.Unmarshal(data, &attendEventInfo)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Print(attendEventInfo)
+}
+
+func DeleteEventFromAttendingList(w http.ResponseWriter, r *http.Request){
+	enableCors(&w)
+	
+	GoingID := r.FormValue("id")
+
+	models.DeleteEventFromAttendList(GoingID)
+
 }
 
 func enableCors(w *http.ResponseWriter) {

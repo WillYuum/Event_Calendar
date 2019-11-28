@@ -1,9 +1,11 @@
 package model
 
 import (
+	"fmt"
 	"log"
 	"time"
 )
+
 
 type Event struct {
 	EventID          int       `json:"EventId"`
@@ -13,27 +15,25 @@ type Event struct {
 	EventStartDate   time.Time `json:"EventStartDate"`
 	EventEndDate     time.Time `json: "EventEndDate"`
 }
+
+
 type Events struct {
 	AllEvents []Event
 }
 
-// initiating + getting db functionalities
-// var db = database.InitDB()
-
 func GetEvents() Events {
-
+	//initialized var with array empty array of type Events
 	events := Events{}
 
 	//query all the rows from Event table
-	sqlStmt := `SELECT * FROM public."Event"`
+	sqlStmt := `SELECT "Event"."EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate"
+	FROM public."Event"`
 	rows, err := db.Query(sqlStmt)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	defer db.Close()
-
-	//looping through the rows in the Events
+	//looping through the event data 
 	for rows.Next() {
 		event := Event{}
 		err := rows.Scan(
@@ -55,6 +55,18 @@ func GetEvents() Events {
 	return events
 }
 
-func CreateEvent() {
+
+func CreateEvent(EventName string, EventDescription string, HostName string, EventStartDate time.Time, EventEndDate time.Time) {
+
+	sqlStmt := `INSERT INTO public."Event"(
+		"EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate")
+		VALUES ($1, $2, $3, $4, $5);`
+	
+	_, err := db.Query(sqlStmt, EventName, EventDescription, HostName, EventStartDate, EventEndDate )
+	if err != nil{
+		log.Fatal(err)
+	}else{
+		fmt.Println("Event got created")
+	}
 
 }

@@ -18,27 +18,17 @@ type AttendingEvent struct {
 	EventEndDate     time.Time `json: "EventEndDate"`
 }
 
-// type AttendingEvent struct {
-// 	EventID          int       `json:"EventId"`
-// 	EventName        string    `json:"EventName"`
-// 	EventDescription string    `json:"EventDescription"`
-// 	HostName         string    `json:"HostName"`
-// 	EventStartDate   time.Time `json:"EventStartDate"`
-// 	EventEndDate     time.Time `json: "EventEndDate"`
-// }
-
 type AttendingEvents struct {
 	AttendingEvents []AttendingEvent
 }
 
 var db = database.InitDB()
 
-func GetAttendingEvents(id int) AttendingEvents {
+func GetAttendingEvents(UserId int) AttendingEvents {
 	events := AttendingEvents{}
-
 	//retrieving Events that the User will be attending
 	sqlStmt := `Select "GoingId", "User_UserId", "EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate" FROM public."Going" Join public."Event" On ("EventId" = "Event_EventId") WHERE "User_UserId" = $1`
-	rows, err := db.Query(sqlStmt, id)
+	rows, err := db.Query(sqlStmt, UserId)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -65,17 +55,33 @@ func GetAttendingEvents(id int) AttendingEvents {
 	return events
 }
 
-func CreateAttendingEventsFile(UserId int, EventId int) {
+//This will Add The Event to the attending list for the user
+func AddEventToAttendList(UserId string, EventId string) {
+
+	//Adds Event that the user will be attending
 	sqlStmt := `INSERT INTO public."Going"(
 		"User_UserId", "Event_EventId")
 		VALUES ( $1, $2);`
 
-	result, err := db.Query(sqlStmt, UserId, EventId)
+	//running the query
+	 _, err := db.Query(sqlStmt, UserId, EventId)
 	if err != nil {
 		log.Fatal(err)
 	} else {
 		fmt.Println("Saved Event to attending events")
 	}
+}
 
-	fmt.Println("result", result)
+
+func DeleteEventFromAttendList(GoingId string){
+
+	sqlStmt := `DELETE FROM public."Going"
+	WHERE "GoingId" = ($1);`
+
+	_, err := db.Query(sqlStmt, GoingId)
+	if err != nil {
+		log.Fatal(err)
+	}else{
+		fmt.Println("Event got deleted")
+	}
 }
