@@ -15,7 +15,7 @@ func InitSessionRoutes(){
 
 	Mux.HandleFunc("/addsession", controller.CreateSession).Methods("Post")
 	
-	Mux.HandleFunc("/updatesession", controller.UpdateSession).Methods("PUT")
+	Mux.HandleFunc("/updatesession", controller.UpdateSession).Methods("Patch")
 
 	Mux.HandleFunc("/deletesession", controller.DeleteSession).Methods("Delete")
 

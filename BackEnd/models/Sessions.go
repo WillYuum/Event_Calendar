@@ -71,9 +71,9 @@ func CreateSession(session Session){
 
 func UpdateSession(session Session){
 	sqlStmt := `UPDATE public."Session"
-	SET "SessionTitle"=COALESCE('labne',$2),
-	"SessionDescription"=COALESCE('labne',$3),
-	"RepresentorName"=COALESCE('labne',$4),
+	SET "SessionTitle"=coalesce($2,"Session"."SessionTitle"),
+	"SessionDescription"=coalesce($3,"Session"."SessionDescription"),
+	"RepresentorName"=coalesce($4,"Session"."RepresentorName"),
 	"SessionStart"=$5,
 	"SessionEnd"=$6
 
