@@ -61,5 +61,4 @@ func DeleteEventFromAttendingList(w http.ResponseWriter, r *http.Request){
 	GoingID := r.FormValue("id")
 
 	models.DeleteEventFromAttendList(GoingID)
-
 }

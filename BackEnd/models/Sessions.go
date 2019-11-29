@@ -1,18 +1,18 @@
 package model
 
 import (
-	"time"
 	"log"
-	// "database/sql"
+	"fmt"
 )
 
 type Session struct{
-	SessionID     int `json: "SessionID"`
+	EventId int `json: "EventId"`
+	SessionId     int `json: "SessionId"`
 	SessionTitle     string `json: "SessionTitle"`
 	SessionDescription     string  `json: "SessionDescription"`
 	RepresentorName     string  `json: "RepresentorName"`
-	SessionStart     time.Time `json: "SessionStart"`
-	SessionEnd     time.Time `json: "SessionEnd"`
+	SessionStart     string `json: "SessionStart"`
+	SessionEnd     string `json: "SessionEnd"`
 }
 
 type Sessions struct {
@@ -24,8 +24,8 @@ func GetSessions(EventId int) Sessions{
 	sessions := Sessions{}
 
 	//query all the rows from Sessions table
-	sqlStmt := `SELECT "SessionId", "SessionTitle", "SessionDescription", "RepresentorName", "SessionStart", "SessionEnd"
-	FROM public."Session" WHERE "EventId" = $1`
+	sqlStmt := `SELECT "EventId", "SessionId", "SessionTitle", "SessionDescription", "RepresentorName", "SessionStart", "SessionEnd"
+	FROM public."Session" WHERE "Session"."EventId" = $1`
 
 	rows, err := db.Query(sqlStmt, EventId)
 	if err != nil{
@@ -35,7 +35,8 @@ func GetSessions(EventId int) Sessions{
 	for rows.Next(){
 		session := Session{}
 		err := rows.Scan(
-			&session.SessionID,
+			&session.EventId,
+			&session.SessionId,
 			&session.SessionTitle,
 			&session.SessionDescription,
 			&session.RepresentorName,
@@ -51,3 +52,56 @@ func GetSessions(EventId int) Sessions{
 
 	return sessions
 }
+
+func CreateSession(session Session){
+
+	sqlStmt := `INSERT INTO public."Session"(
+		"EventId", "SessionTitle", "SessionDescription", "RepresentorName", "SessionStart", "SessionEnd")
+		VALUES ($1, $2, $3, $4, $5, $6);`
+
+
+	_, err := db.Query(sqlStmt, session.EventId, session.SessionTitle, session.SessionDescription, session.RepresentorName, session.SessionStart, session.SessionEnd)
+	if err != nil {
+		log.Fatal(err)
+	}else{
+		fmt.Println("Created a session")
+	}
+	
+}
+
+func UpdateSession(session Session){
+	sqlStmt := `UPDATE public."Session"
+	SET "SessionTitle"=COALESCE('labne',$2),
+	"SessionDescription"=COALESCE('labne',$3),
+	"RepresentorName"=COALESCE('labne',$4),
+	"SessionStart"=$5,
+	"SessionEnd"=$6
+
+	WHERE "SessionId"= $1`
+	fmt.Println(session)
+	 _,err := db.Exec(sqlStmt, session.SessionId, session.SessionTitle, session.SessionDescription, session.RepresentorName, session.SessionStart, session.SessionEnd)
+	
+	 if err != nil {
+		log.Fatal(err)
+	}else{
+		fmt.Println("session got updated")
+	}
+}
+
+func DeleteSession(SessionId int){
+	sqlstmt := `DELETE FROM public."Session"
+	WHERE "Session"."SessionId" = $1`
+	
+	_, err := db.Query(sqlstmt, SessionId)
+	if err != nil {
+		log.Fatal(err)
+		}else{
+			fmt.Println("Session got deleted")
+		}
+
+	//! check this with Mohamad for a specific way of deleting session
+	// DELETE FROM public."Session"
+	// 	WHERE "Session"."SessionId" = 6
+	// 	AND "EventId" = 1
+}
+
