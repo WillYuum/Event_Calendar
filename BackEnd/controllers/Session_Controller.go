@@ -10,7 +10,7 @@ import (
 	"strconv"
 )
 
-func GetSessions(w http.ResponseWriter, r *http.Request) {
+func HandleGetSessions(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	param, _ := r.URL.Query()["eventid"]
@@ -27,7 +27,7 @@ func GetSessions(w http.ResponseWriter, r *http.Request) {
 }
 
 //Creates a session for a specefic event
-func CreateSession(w http.ResponseWriter, r *http.Request) {
+func HandleCreateSession(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 	var session models.Session
 
@@ -46,7 +46,7 @@ func CreateSession(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func UpdateSession(w http.ResponseWriter, r *http.Request) {
+func HandleUpdateSession(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	var session models.Session
@@ -67,7 +67,7 @@ func UpdateSession(w http.ResponseWriter, r *http.Request) {
 }
 
 //delete a session by SessionId
-func DeleteSession(w http.ResponseWriter, r *http.Request) {
+func HandleDeleteSession(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	//retrieve eventid value and assigned to a var as int

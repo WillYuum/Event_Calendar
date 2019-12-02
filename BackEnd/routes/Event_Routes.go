@@ -9,6 +9,6 @@ import (
 
 func InitEventRoute() {
 	//Listing All events in db
-	Mux.HandleFunc("/events", controller.GetEvent).Methods("GET")
+	Mux.HandleFunc("/events", controller.HandleGetEvent).Methods("GET")
 	
 }

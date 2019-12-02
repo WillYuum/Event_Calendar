@@ -10,7 +10,7 @@ import (
 )
 
 //list all events in data base
-func GetEvent(w http.ResponseWriter, r *http.Request) {
+func HandleGetEvent(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	//giving type to events var

@@ -12,7 +12,7 @@ import (
 
 
 //List all Events that the user will attend
-func GetAttendingEvent(w http.ResponseWriter, r *http.Request) {
+func HandleGetAttendingEvent(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	//requesting value from params of key 'id'
@@ -44,7 +44,7 @@ type AttendEventInfo struct {
 	EventId int `json: "EventId"`
 }
 
-func AttendEvent(w http.ResponseWriter, r *http.Request) {
+func HandleAttendEvent(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	UserId := r.FormValue("UserId")
@@ -55,7 +55,7 @@ func AttendEvent(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func DeleteEventFromAttendingList(w http.ResponseWriter, r *http.Request){
+func HandleDeleteAttendingEvent(w http.ResponseWriter, r *http.Request){
 	utils.EnableCors(&w)
 	
 	GoingID := r.FormValue("id")
