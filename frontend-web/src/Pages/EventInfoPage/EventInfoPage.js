@@ -4,7 +4,7 @@ import React from 'react';
 import "./EventInfoPage";
 
 
-class EventInfoPage extends Component {
+class EventInfoPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 

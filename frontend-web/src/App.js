@@ -3,8 +3,10 @@ import React from "react";
 import { Route, withRouter, Switch } from "react-router-dom";
 
 //-------------IMPORTED COMPONENTS----------------------
+import NavBar from "./Components/NavBar/NavBar.js";
 import LandingPage from "./Pages/LandingPage/LandingPage.js";
 import EventInfoPage from "./Pages/EventInfoPage/EventInfoPage.js";
+import Footer from "./Components/Footer/Footer.js";
 //-------------IMPORTED COMPONENTS----------------------
 
 import "./App.scss";
@@ -18,6 +20,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <NavBar />
+
         <Switch>
           <Route
             path="/"
@@ -34,6 +38,8 @@ class App extends React.Component {
             }}
           />
         </Switch>
+
+        <Footer />
       </div>
     );
   }
