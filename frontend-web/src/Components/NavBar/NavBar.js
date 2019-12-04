@@ -15,7 +15,7 @@ class NavBar extends React.Component {
             <h1>Eventos</h1>
           </div>
           <ul className="navigationBtns-container">
-            <li>SingIn</li>
+            <li>SignIn</li>
           </ul>
         </div>
       </div>

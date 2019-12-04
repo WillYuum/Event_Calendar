@@ -32,9 +32,9 @@ class App extends React.Component {
           />
 
           <Route
-            path="EventInfoPage"
-            render={() => {
-              return <EventInfoPage />;
+            path="event/:id"
+            render={props => {
+              return <EventInfoPage {...props} />;
             }}
           />
         </Switch>

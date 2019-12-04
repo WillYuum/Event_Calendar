@@ -1,0 +1,9 @@
+.LargeCalendar-container{
+    
+    .fc-day-grid-event{
+        //hovering over event on calendar    
+        :hover{
+            cursor: pointer;
+        }
+    }
+}

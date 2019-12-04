@@ -10,23 +10,48 @@ import "./LandingPage.scss";
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      EventData: []
+    };
   }
+
+  getEventData = async () => {
+    try {
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
+  /**
+   *@function getEventData - gets a specific event data from calendar to LandingPage
+   *@param {Array} EventData - data that will be provided by the Calendar
+   * @memberof LandingPage
+   */
+  getEventData = EventData => {
+    this.setState({ EventData });
+  };
+
   render() {
+    const { EventData } = this.state;
     return (
       <div className="LandingPage-container">
-        <div className="VideoIntro-Container">
+        {/* <div className="VideoIntro-Container">
             <video className='VideoIntro' autoPlay loop muted>
                 <source src="https://www.meetup.com/mu_static/en-US/video.dddafbfe.mp4" type="video/mp4"/>
             </video>
-        </div>
+        </div> */}
 
         <div className="EventContent-container">
-          {/* <LargeCalendar />
-          <EventDetailsCard /> */}
+          <div className="LargeCalender-section">
+            <LargeCalendar
+              //function to get the data from the calendar
+              getEventData={this.getEventData}
+            />
+          </div>
+          <div className="EventDetailsCard-section">
+            <EventDetailsCard EventData={EventData} />
+          </div>
         </div>
-
-
       </div>
     );
   }
