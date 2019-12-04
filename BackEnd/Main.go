@@ -12,5 +12,5 @@ func main() {
 	route.InitEventRoute()
 	route.InitSessionRoutes()
 	route.InitAttendingEventRoutes()
-	log.Fatal(http.ListenAndServe(":3000", route.Mux))
+	log.Fatal(http.ListenAndServe(":3001", route.Mux))
 }
