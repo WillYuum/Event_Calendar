@@ -25,50 +25,51 @@ class EventDetailsCard extends React.Component {
     return (
       <div className="EventDetailsCard-cotainer">
         <div className="TopPart">
-          <div className="heading">
-            <h2>Event Details</h2>
-          </div>
+          <div
+            className="EventImage"
+            style={{
+              backgroundImage: `url("https://images-lebtivity-com.s3.amazonaws.com/content/versions/93540/1280-720-0-0/bibe_2019_beirut_international_beer_event.jpeg")`
+            }}
+          ></div>
+        </div>
 
-          
+        <div className="bottomPart">
           <div className="EventBriefInfo">
             <ul className="listOfBriefInfo">
-              <li>
-                EventName: <span>{EventData.title}</span>
+              <li className="EventTitle">
+                {EventData.title ? (
+                  EventData.title
+                ) : (
+                  <small>Click on event to see title</small>
+                )}
               </li>
               <li>
-                Date:{" "}
-                <span>
-                  {EventData.start
-                    ? FixDateTimeFormat(EventData.start, "date")
-                    : ""}
-                </span>
+                Where <br />
+                <span>Beirut</span>
               </li>
               <li>
-                Time:{" "}
+                When <br />
                 <span>
+                  {EventData.start ? (
+                    FixDateTimeFormat(EventData.start, "date")
+                  ) : (
+                    <small>Click on event to see date</small>
+                  )}
+                  <br />
                   {EventData.start
                     ? FixDateTimeFormat(EventData.start, "time")
                     : ""}
                 </span>
               </li>
               <li>
-                HostName: <span>{EventData.HostName}</span>
-              </li>
-              <li>
-                Location: <span>{}</span>
+                HostName
+                <br />
+                <span>{EventData.HostName}</span>
               </li>
             </ul>
-
-            <div>
-              <h3>Description</h3>
-              <p>{EventData.Description}</p>
-            </div>
           </div>
-        </div>
-
-        <div className="button-container">
-          <Link to={`/event/${EventData.id}`}>
-            <button>More Info</button>
+          <Link className="MoreInfoBtn" to={`/event/${EventData.id}`}>
+            <p className="btnText">More Info</p>
           </Link>
         </div>
       </div>

@@ -1,7 +1,10 @@
 import React from "react";
+//---------------FullCalendar modules----------------
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
+//---------------FullCalendar modules----------------
+
 
 //--------FullCalendar css-----------
 import "@fullcalendar/core/main.css";
@@ -25,7 +28,7 @@ class LargeCalendar extends React.Component {
   Back_Url = process.env.REACT_APP_PORT;
 
   /**
-   *@function getAllEvents - fetches all Events information for backend
+   * @function getAllEvents - fetches all Events information for backend
    * @memberof LargeCalendar
    */
   getAllEvents = async () => {
@@ -63,6 +66,7 @@ class LargeCalendar extends React.Component {
 
     //returning the event data that has been clicked on in calendar
     const Event = this.state.Events.filter(event => {
+      // eslint-disable-next-line eqeqeq
       return event.id == info.event._def.publicId;
     });
     //saving the event data in state in LandingPage

@@ -1,8 +1,7 @@
 .NavBar-container {
-  background-color: gray;
+  background-color: green;
   width: 100%;
   height: 80px;
-  position: fixed;
   .content {
     padding: 20px;
     display: flex;
@@ -11,8 +10,9 @@
     }
 
     .navigationBtns-container {
+      display: table;
       li {
-        font-size: 25px;
+        font-size: 18px;
         list-style: none;
       }
     }
