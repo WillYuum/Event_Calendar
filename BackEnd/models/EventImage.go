@@ -6,18 +6,21 @@ import (
 	"log"
 )
 
-type EventImage struct{
-	EventId int `json:"EventId"`
-	ImageId int `json:"ImageId"`
-	Image []byte `json:"Image"`
+// EventImage structure
+type EventImage struct {
+	EventId int    `json:"EventId"`
+	ImageId int    `json:"ImageId"`
+	Image   []byte `json:"Image"`
 }
 
-type EventImages struct{
+//array to store EventImage data
+type EventImages struct {
 	AllImages []EventImage
 }
 
-func GetImagesByEventId(EventId int) EventImages{
-	 eventImages := EventImages{}
+//retrieving images by image id from database
+func GetImagesByEventId(EventId int) EventImages {
+	eventImages := EventImages{}
 
 	sqlStmt := `SELECT "EventId", "ImageId", "Image"
 	FROM public."EventImage" WHERE "EventId" = $1;`
@@ -27,7 +30,9 @@ func GetImagesByEventId(EventId int) EventImages{
 		log.Fatal(err)
 	}
 
-	for rows.Next(){
+	//assigning the image's data to a specific key
+	for rows.Next() {
+		//creating an instance  of type EventImage
 		eventImage := EventImage{}
 		err := rows.Scan(
 			&eventImage.EventId,
@@ -37,36 +42,41 @@ func GetImagesByEventId(EventId int) EventImages{
 		if err != nil {
 			log.Fatal(err)
 		}
+		//adding all images data to array
 		eventImages.AllImages = append(eventImages.AllImages, eventImage)
 	}
-
+	//returning the array of images data
 	return eventImages
 }
 
-func UploadImage(EventId int, ImageBytes []byte){
-	
+//upload image to event depending on Event id
+func UploadImage(EventId int, ImageBytes []byte) {
+	//query to insert data to EventImage table
 	sqlStmt := `INSERT INTO public."EventImage"(
 		"EventId", "Image")
 		VALUES ($1, $2);`
 
-		_, err := db.Exec(sqlStmt, EventId, ImageBytes)
-		if err != nil {
-			log.Fatal(err)
-		}else{
-			log.Println("saved image in db")
-		}
-	
+	//execution of query with EventId and bytes of the image
+	_, err := db.Exec(sqlStmt, EventId, ImageBytes)
+	if err != nil {
+		log.Fatal(err)
+	} else {
+		log.Println("saved image in db")
+	}
+
 }
 
-
-func DeleteImage(ImageId int){
+//deleting image from specific event
+func DeleteImage(ImageId int) {
+	//query to delete image
 	sqlStmt := `DELETE FROM public."EventImage"
 	WHERE "ImageId" = $1;`
 
+	//execution of query with ImageId
 	_, err := db.Exec(sqlStmt, ImageId)
-	if err != nil{
+	if err != nil {
 		log.Fatal(err)
-	}else{
+	} else {
 		fmt.Println("Image got deleted")
 	}
-} 
+}

@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-
+//Event Structure
 type Event struct {
 	EventID          int       `json:"EventId"`
 	EventName        string    `json:"EventName"`
@@ -16,11 +16,12 @@ type Event struct {
 	EventEndDate     time.Time `json: "EventEndDate"`
 }
 
-
+//array to store Event data
 type Events struct {
 	AllEvents []Event
 }
 
+//retrieve all events from database
 func GetEvents() Events {
 	//initialized var with array empty array of type Events
 	events := Events{}
@@ -33,7 +34,7 @@ func GetEvents() Events {
 		log.Fatal(err)
 	}
 
-	//looping through the event data 
+	//looping through the event data
 	for rows.Next() {
 		event := Event{}
 		err := rows.Scan(
@@ -55,17 +56,16 @@ func GetEvents() Events {
 	return events
 }
 
-
 func CreateEvent(EventName string, EventDescription string, HostName string, EventStartDate time.Time, EventEndDate time.Time) {
 
 	sqlStmt := `INSERT INTO public."Event"(
 		"EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate")
 		VALUES ($1, $2, $3, $4, $5);`
-	
-	_, err := db.Query(sqlStmt, EventName, EventDescription, HostName, EventStartDate, EventEndDate )
-	if err != nil{
+
+	_, err := db.Query(sqlStmt, EventName, EventDescription, HostName, EventStartDate, EventEndDate)
+	if err != nil {
 		log.Fatal(err)
-	}else{
+	} else {
 		fmt.Println("Event got created")
 	}
 

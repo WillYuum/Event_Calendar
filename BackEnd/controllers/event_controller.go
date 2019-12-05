@@ -24,5 +24,6 @@ func HandleGetEvent(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
+	//sending the events data to the client side
 	fmt.Fprintf(w, "%s", data)
 }

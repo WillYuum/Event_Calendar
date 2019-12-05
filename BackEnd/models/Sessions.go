@@ -6,6 +6,7 @@ import (
 	"log"
 )
 
+//Session Structure
 type Session struct {
 	EventId            int    `json: "EventId"`
 	SessionId          int    `json: "SessionId"`
@@ -16,10 +17,12 @@ type Session struct {
 	SessionEnd         string `json: "SessionEnd"`
 }
 
+//array to store Session data
 type Sessions struct {
 	AllSessions []Session
 }
 
+//retrieving session data depending on the event id
 func GetSessions(EventId int) Sessions {
 	sessions := Sessions{}
 
@@ -53,6 +56,7 @@ func GetSessions(EventId int) Sessions {
 	return sessions
 }
 
+//creating a session depending on the Session struct
 func CreateSession(session Session) {
 
 	sqlStmt := `INSERT INTO public."Session"(
@@ -68,6 +72,8 @@ func CreateSession(session Session) {
 
 }
 
+//function that returns null if input is empty else returns the value
+//This is used for coalesce while updating the data in session
 func NewNullString(s string) sql.NullString {
 	if len(s) == 0 {
 		return sql.NullString{}
@@ -78,8 +84,10 @@ func NewNullString(s string) sql.NullString {
 	}
 }
 
+//Update the session depending on the Session struct and the session id
 func UpdateSession(session Session) {
-	fmt.Println(session.SessionDescription)
+
+	//query to update the session and check if there's null string
 	sqlStmt := `UPDATE public."Session"
 	SET "SessionTitle"=coalesce($2,"Session"."SessionTitle"),
 	"SessionDescription"=coalesce($3,"Session"."SessionDescription"),
@@ -88,7 +96,8 @@ func UpdateSession(session Session) {
 	"SessionEnd"=$6
 
 	WHERE "SessionId"= $1`
-	fmt.Println(session)
+
+	//executing the query and checking for null string using "NewNullString"
 	_, err := db.Exec(sqlStmt, session.SessionId, NewNullString(session.SessionTitle), NewNullString(session.SessionDescription), NewNullString(session.RepresentorName), session.SessionStart, session.SessionEnd)
 
 	if err != nil {
@@ -98,6 +107,7 @@ func UpdateSession(session Session) {
 	}
 }
 
+//delete session depending on session id
 func DeleteSession(SessionId int) {
 	sqlstmt := `DELETE FROM public."Session"
 	WHERE "Session"."SessionId" = $1`

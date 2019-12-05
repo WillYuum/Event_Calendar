@@ -1,12 +1,10 @@
 package route
 
-
 import (
 	controller "backend/controllers"
 )
 
-
-func InitEventImageRoutes(){
+func InitEventImageRoutes() {
 	//gets images from specific event by id route
 	Mux.HandleFunc("/getimages", controller.HandleGetImagesByEventId).Methods("GET")
 	//upload image route

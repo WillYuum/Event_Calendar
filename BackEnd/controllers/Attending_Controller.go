@@ -10,7 +10,6 @@ import (
 	"strconv"
 )
 
-
 //List all Events that the user will attend
 func HandleGetAttendingEvent(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
@@ -38,7 +37,6 @@ func HandleGetAttendingEvent(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", data)
 }
 
-
 type AttendEventInfo struct {
 	UserId  int `json: "UserId"`
 	EventId int `json: "EventId"`
@@ -49,15 +47,14 @@ func HandleAttendEvent(w http.ResponseWriter, r *http.Request) {
 
 	UserId := r.FormValue("UserId")
 	EventId := r.FormValue("EventId")
-	
+
 	models.AddEventToAttendList(UserId, EventId)
 
 }
 
-
-func HandleDeleteAttendingEvent(w http.ResponseWriter, r *http.Request){
+func HandleDeleteAttendingEvent(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
-	
+
 	GoingID := r.FormValue("id")
 
 	models.DeleteEventFromAttendList(GoingID)

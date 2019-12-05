@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+//AttendingEvent structure
 type AttendingEvent struct {
 	GoingId          int       `json: "GoingId"`
 	User_UserId      int       `json: "User_UserId"`
@@ -18,12 +19,15 @@ type AttendingEvent struct {
 	EventEndDate     time.Time `json: "EventEndDate"`
 }
 
+//array to store AttendingEvent data
 type AttendingEvents struct {
 	AttendingEvents []AttendingEvent
 }
 
+//initialize the connect to database
 var db = database.InitDB()
 
+//retrieve all attending events that the user wants to attend
 func GetAttendingEvents(UserId int) AttendingEvents {
 	events := AttendingEvents{}
 	//retrieving Events that the User will be attending
@@ -64,7 +68,7 @@ func AddEventToAttendList(UserId string, EventId string) {
 		VALUES ( $1, $2);`
 
 	//running the query
-	 _, err := db.Query(sqlStmt, UserId, EventId)
+	_, err := db.Query(sqlStmt, UserId, EventId)
 	if err != nil {
 		log.Fatal(err)
 	} else {
@@ -72,16 +76,17 @@ func AddEventToAttendList(UserId string, EventId string) {
 	}
 }
 
-
-func DeleteEventFromAttendList(GoingId string){
-
+//delete event depending on the attending event id
+func DeleteEventFromAttendList(GoingId string) {
+	//delete query for attending event
 	sqlStmt := `DELETE FROM public."Going"
 	WHERE "GoingId" = ($1);`
 
+	//execution of query with the id of attending event
 	_, err := db.Query(sqlStmt, GoingId)
 	if err != nil {
 		log.Fatal(err)
-	}else{
+	} else {
 		fmt.Println("Event got deleted")
 	}
 }

@@ -6,11 +6,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
+//Mux helps in handling controller functions + adding the request methods
 var Mux = mux.NewRouter()
 
-func InitSessionRoutes(){
+func InitSessionRoutes() {
 	//List all sessions for a specific event
-	//api params: "EventId"
 	Mux.HandleFunc("/sessions", controller.HandleGetSessions).Methods("Get")
 	//add session to specific event
 	Mux.HandleFunc("/addsession", controller.HandleCreateSession).Methods("Post")

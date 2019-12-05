@@ -16,7 +16,6 @@ const (
 	dbname   = "Events_DB"
 )
 
-
 func InitDB() *sql.DB {
 
 	// added configuration to db connection

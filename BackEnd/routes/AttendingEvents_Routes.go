@@ -2,11 +2,9 @@ package route
 
 import (
 	controller "backend/controllers"
-
 )
 
-
-func InitAttendingEventRoutes(){
+func InitAttendingEventRoutes() {
 	//listing Events that a user will be attending
 	Mux.HandleFunc("/attendingevents", controller.HandleGetAttendingEvent).Methods("GET")
 
