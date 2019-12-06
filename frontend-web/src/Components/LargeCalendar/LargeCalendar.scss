@@ -6,4 +6,32 @@
             cursor: pointer;
         }
     }
+
+    .fc-today{
+        background-color:#ecc3c8 !important; 
+    }
+
+
+    .fc-more{
+        color:#cd2f3e;
+    }
+
+    .fc-popover .fc-header{
+        background-color: #cd2f3e;
+        color:white
+    }
+
+    .fc-event{
+        border-color:#cd2f3e;
+        background-color:white;
+        color:#cd2f3e;
+        :hover{
+            background-color:#cd2f3e;
+            color:white
+        }
+
+        :active{
+            background-color:green;
+        }
+    }
 }

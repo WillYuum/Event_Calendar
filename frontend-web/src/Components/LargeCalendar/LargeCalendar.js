@@ -69,7 +69,7 @@ class LargeCalendar extends React.Component {
       // eslint-disable-next-line eqeqeq
       return event.id == info.event._def.publicId;
     });
-    //saving the event data in state in LandingPage
+    //saving the event data in state in LandingPage component
     getEventData(Event);
   };
 
@@ -96,7 +96,7 @@ class LargeCalendar extends React.Component {
           eventClick={this.handleEventClick}
           selectable={false}
           select={this.handleSelectedDates}
-          eventLimit={4}
+          eventLimit={3}
         />
       </div>
     );

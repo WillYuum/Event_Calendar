@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FixDateTimeFormat } from "../../utils/FixTimeFormat.js";
 
+//-------------Imported icons-------------------
+import locationIcon from "../../assets/LocationIcon.svg";
+//-------------Imported icons-------------------
+
 import "./EventDetailsCard.scss";
 
 class EventDetailsCard extends React.Component {
@@ -64,17 +68,13 @@ class EventDetailsCard extends React.Component {
         <div className="bottomPart">
           <div className="EventBriefInfo">
             <ul className="listOfBriefInfo">
-              <li className="EventTitle">
+              <h2 className="EventTitle">
                 {EventData.title ? (
                   EventData.title
                 ) : (
                   <small>Click on event to see title</small>
                 )}
-              </li>
-              <li>
-                Where <br />
-                <span>Beirut</span>
-              </li>
+              </h2>
               <li>
                 When <br />
                 <span>
@@ -90,9 +90,20 @@ class EventDetailsCard extends React.Component {
                 </span>
               </li>
               <li>
-                HostName
+                Where <br />
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Beirut</span>
+              </li>
+              <li>
+                Host's Name
                 <br />
-                <span>{EventData.HostName}</span>
+                <span>
+                  {EventData.HostName ? (
+                    EventData.HostName
+                  ) : (
+                    <small>Click on event to see title</small>
+                  )}
+                </span>
               </li>
             </ul>
           </div>
