@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
 )
 
 //list all events in data base
@@ -31,10 +32,13 @@ func HandleGetEvent(w http.ResponseWriter, r *http.Request) {
 func HandleGetEventById(w http.ResponseWriter, r *http.Request){
 	utils.EnableCors(&w)
 
+	//retrieving the event id and changing it to integer
+	param, _ := r.URL.Query()["eventid"]
+	EventID, _ := strconv.Atoi(param[0])
 
 	var event models.Event
 
-	 event = models.GetEventById(1)
+	event = models.GetEventById(EventID)
 
 	data, err := json.Marshal(event)
 	if err != nil {
