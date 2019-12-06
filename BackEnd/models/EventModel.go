@@ -16,6 +16,7 @@ type Event struct {
 	EventEndDate     time.Time `json: "EventEndDate"`
 }
 
+
 //array to store Event data
 type Events struct {
 	AllEvents []Event
@@ -54,6 +55,28 @@ func GetEvents() Events {
 	}
 	//returning the array with all rows
 	return events
+}
+
+func GetEventById(EventId int)Event{
+	//query to get event depending on  event id
+	sqlStmt := `SELECT "EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate"
+	FROM public."Event" WHERE "EventId" = $1`
+
+	//retrieving data from database
+	row := db.QueryRow(sqlStmt, EventId)
+
+	//creating structure for variable and adding the row value to it
+	event := Event{}
+	row.Scan(
+		&event.EventID,
+			&event.EventName,
+			&event.EventDescription,
+			&event.HostName,
+			&event.EventStartDate,
+			&event.EventEndDate,
+	)
+
+	return event
 }
 
 func CreateEvent(EventName string, EventDescription string, HostName string, EventStartDate time.Time, EventEndDate time.Time) {

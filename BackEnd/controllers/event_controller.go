@@ -27,3 +27,20 @@ func HandleGetEvent(w http.ResponseWriter, r *http.Request) {
 	//sending the events data to the client side
 	fmt.Fprintf(w, "%s", data)
 }
+
+func HandleGetEventById(w http.ResponseWriter, r *http.Request){
+	utils.EnableCors(&w)
+
+
+	var event models.Event
+
+	 event = models.GetEventById(1)
+
+	data, err := json.Marshal(event)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// //sending the events data to the client side
+	fmt.Fprintf(w, "%s", data)
+}
