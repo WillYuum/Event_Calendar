@@ -33,7 +33,7 @@ class LargeCalendar extends React.Component {
    */
   getAllEvents = async () => {
     try {
-      const req = await fetch(`${this.Back_Url}/events`);
+      const req = await fetch(`${this.Back_Url}/getevents`);
       const res = await req.json();
 
       //create a new struct for object since calendar takes a different obbject struct

@@ -32,7 +32,7 @@ export const FixDateTimeFormat = (DateTimeFormat, typeOfFormat) => {
     const MonthInString = Months[dateTimeFormat.getMonth() - 1];
 
     //adding the whole date to one string
-    const FullDate = `${dateTimeFormat.getDay()},${dateTimeFormat.getFullYear()}`;
+    const FullDate = `${dateTimeFormat.getDay()}, ${dateTimeFormat.getFullYear()}`;
 
     return `${DayInString},\n ${MonthInString} ${FullDate}`;
   } else if (typeOfFormat === "time") {

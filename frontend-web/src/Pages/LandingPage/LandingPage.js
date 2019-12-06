@@ -15,13 +15,6 @@ class LandingPage extends React.Component {
     };
   }
 
-  getEventData = async () => {
-    try {
-    } catch (err) {
-      throw new Error(err);
-    }
-  };
-
   /**
    *@function getEventData - gets a specific event data from calendar to LandingPage
    *@param {Array} EventData - data that will be provided by the Calendar

@@ -8,8 +8,8 @@
     width: 100%;
     height: 35%;
     .EventImage {
-      max-width: 100%;
-      max-height: 100%;
+      width: 100%;
+      height: 100%;
       background-size: cover;
       background-position: center;
     }
@@ -23,7 +23,7 @@
     padding: 5%;
     .EventBriefInfo {
       display: flex;
-    flex-direction: column;
+      flex-direction: column;
       flex-grow: 1;
       .listOfBriefInfo {
         list-style: none;
@@ -33,7 +33,7 @@
           font-size: 20px;
           margin: 20px 0;
 
-          span{
+          span {
             display: block;
             font-size: 18px;
             margin-left: 20px;
@@ -55,12 +55,12 @@
       height: 45px;
       margin: 0 auto;
       text-decoration: none;
-      
+
       .btnText {
         display: table-cell;
         vertical-align: middle;
         text-align: center;
-        color:#ffffff;
+        color: #ffffff;
         width: 100%;
         height: 100%;
       }

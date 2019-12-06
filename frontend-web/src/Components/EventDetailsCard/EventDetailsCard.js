@@ -8,27 +8,55 @@ class EventDetailsCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      EventData: ""
+      EventData: "",
+      EventImage: ""
     };
   }
+
+  // storing backend Url in readable variable
+  Back_Url = process.env.REACT_APP_PORT;
 
   async componentWillReceiveProps(prevProps) {
     if (prevProps) {
       await this.setState({ EventData: prevProps.EventData[0] });
+      await console.log(this.state.EventData.id);
+      await this.getEventImageById(this.state.EventData.id);
     } else {
       return;
     }
   }
 
+  /**
+   * @function getEventImage - getting image from specific event to display it to it to the user
+   *
+   * @memberof EventDetailsCard
+   */
+  getEventImageById = async eventId => {
+    try {
+      const req = await fetch(`${this.Back_Url}/getimages?EventId=` + eventId);
+      const result = await req.json();
+
+      if (result) {
+        this.setState({ EventImage: result[0].Image });
+      } else {
+        this.setState({ EventImage: "" });
+      }
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
   render() {
     const { EventData } = this.state;
+    console.log(this.state.EventImage);
     return (
       <div className="EventDetailsCard-cotainer">
         <div className="TopPart">
           <div
             className="EventImage"
             style={{
-              backgroundImage: `url("https://images-lebtivity-com.s3.amazonaws.com/content/versions/93540/1280-720-0-0/bibe_2019_beirut_international_beer_event.jpeg")`
+              backgroundImage:
+                "url('data:image/png;base64," + this.state.EventImage + "')"
             }}
           ></div>
         </div>
