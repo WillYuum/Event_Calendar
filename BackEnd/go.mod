@@ -8,4 +8,6 @@ require (
 	github.com/rogpeppe/godef v1.1.1 // indirect
 	github.com/zemirco/couchdb v0.0.0-20170316052722-83ed906ea1f0 // indirect
 	github.com/zemirco/uid v0.0.0-20160129141151-3763f3c45832 // indirect
+	golang.org/x/tools v0.0.0-20191206204035-259af5ff87bd // indirect
+	golang.org/x/tools/gopls v0.2.1 // indirect
 )

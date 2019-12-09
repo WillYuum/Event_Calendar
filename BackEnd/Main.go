@@ -1,16 +1,12 @@
 package main
 
 import (
-	DB "backend/database"
 	route "backend/routes"
 	"log"
 	"net/http"
 )
 
 func main() {
-	//initiating connection to database
-	DB.InitDB()
-
 	//initiating all routes to be used in client side
 	route.InitEventRoute()
 	route.InitSessionRoutes()
