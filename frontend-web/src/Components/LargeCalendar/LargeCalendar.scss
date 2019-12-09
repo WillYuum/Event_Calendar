@@ -8,30 +8,23 @@
     }
 
     .fc-today{
-        background-color:#ecc3c8 !important; 
+        background-color:rgb(152, 171, 204) !important; 
     }
 
 
     .fc-more{
-        color:#cd2f3e;
+        color:#4D648D;
     }
 
     .fc-popover .fc-header{
-        background-color: #cd2f3e;
+        background-color: #4D648D;
         color:white
     }
 
     .fc-event{
-        border-color:#cd2f3e;
-        background-color:white;
-        color:#cd2f3e;
-        :hover{
-            background-color:#cd2f3e;
-            color:white
-        }
-
-        :active{
-            background-color:green;
-        }
+        border-color:#4D648D;
+        background-color:#4D648D;
+        color:white;
+      
     }
 }

@@ -13,7 +13,10 @@ class EventDetailsCard extends React.Component {
     super(props);
     this.state = {
       EventData: "",
-      EventImage: ""
+      EventImage: "",
+      lat: 33.892314,
+      lng: 35.504858,
+      zoom: 13
     };
   }
 
@@ -52,7 +55,6 @@ class EventDetailsCard extends React.Component {
 
   render() {
     const { EventData } = this.state;
-    console.log(this.state.EventImage);
     return (
       <div className="EventDetailsCard-cotainer">
         <div className="TopPart">
@@ -91,8 +93,10 @@ class EventDetailsCard extends React.Component {
               </li>
               <li>
                 Where <br />
-                <i class="fas fa-map-marker-alt"></i>
-                <span>Beirut</span>
+                <div>
+                  
+                </div>
+                {/* <MyMapComponent isMarkerShown={false} /> */}
               </li>
               <li>
                 Host's Name
