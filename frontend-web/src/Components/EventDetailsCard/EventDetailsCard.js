@@ -2,6 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FixDateTimeFormat } from "../../utils/FixTimeFormat.js";
 
+//----------------------------IMPORTED COMPONENTS------------------------------
+import EventMapLocation from "../EventMapLocation/EventMapLocation.js";
+//----------------------------IMPORTED COMPONENTS------------------------------
+
 //-------------Imported icons-------------------
 import locationIcon from "../../assets/LocationIcon.svg";
 //-------------Imported icons-------------------
@@ -57,6 +61,7 @@ class EventDetailsCard extends React.Component {
     const { EventData } = this.state;
     return (
       <div className="EventDetailsCard-cotainer">
+        {/* {-----------------------IMAGE SECTION---------------------} */}
         <div className="TopPart">
           <div
             className="EventImage"
@@ -66,10 +71,13 @@ class EventDetailsCard extends React.Component {
             }}
           ></div>
         </div>
+        {/* {-----------------------IMAGE SECTION---------------------} */}
 
         <div className="bottomPart">
           <div className="EventBriefInfo">
             <ul className="listOfBriefInfo">
+              {/* {-------------------Event Title section---------------} */}
+
               <h2 className="EventTitle">
                 {EventData.title ? (
                   EventData.title
@@ -77,6 +85,28 @@ class EventDetailsCard extends React.Component {
                   <small>Click on event to see title</small>
                 )}
               </h2>
+              {/* {-------------------Event Title section---------------} */}
+
+              {/* {-------------------HostName & moreInfo button section---------------} */}
+              <div className="hostName-infoBtn">
+                <li>
+                  Host's Name
+                  <br />
+                  <span>
+                    {EventData.HostName ? (
+                      EventData.HostName
+                    ) : (
+                      <small>Click on event to see title</small>
+                    )}
+                  </span>
+                </li>
+                <Link className="MoreInfoBtn" to={`/event/${EventData.id}`}>
+                  <p className="btnText">More Info</p>
+                </Link>
+              </div>
+              {/* {-------------------HostName & moreInfo button section---------------} */}
+
+              {/* {-------------------Date and Time section---------------} */}
               <li>
                 When <br />
                 <span>
@@ -91,29 +121,16 @@ class EventDetailsCard extends React.Component {
                     : ""}
                 </span>
               </li>
+              {/* {-------------------Date and Time section---------------} */}
+
+              {/* {----------------------MAP SECTION---------------------} */}
               <li>
                 Where <br />
-                <div>
-                  
-                </div>
-                {/* <MyMapComponent isMarkerShown={false} /> */}
-              </li>
-              <li>
-                Host's Name
-                <br />
-                <span>
-                  {EventData.HostName ? (
-                    EventData.HostName
-                  ) : (
-                    <small>Click on event to see title</small>
-                  )}
-                </span>
+                <EventMapLocation />
               </li>
             </ul>
           </div>
-          <Link className="MoreInfoBtn" to={`/event/${EventData.id}`}>
-            <p className="btnText">More Info</p>
-          </Link>
+          {/* {----------------------MAP SECTION---------------------} */}
         </div>
       </div>
     );
