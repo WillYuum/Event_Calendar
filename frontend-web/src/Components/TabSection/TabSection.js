@@ -56,22 +56,22 @@ class TabSection extends React.Component {
     //receiving EventData props from EventInfoPage Component
     const { EventData } = this.props;
     return (
-      <section class="tabs">
-        <ul class="tabs" role="tablist">
+      <div className="TabSection">
+        <ul className="tabs" role="tablist">
           <li>
-            <input type="radio" name="tabs" id="tab1" checked />
+            <input type="radio" name="tabs" id="tab1" defaultChecked />
             <label
-              for="tab1"
+              htmlFor="tab1"
               role="tab"
               aria-selected="true"
               aria-controls="panel1"
-              tabindex="0"
+              tabIndex="0"
             >
               Description
             </label>
             <div
               id="tab-content1"
-              class="tab-content"
+              className="tab-content"
               role="tabpanel"
               aria-labelledby="description"
               aria-hidden="false"
@@ -83,30 +83,36 @@ class TabSection extends React.Component {
           <li>
             <input type="radio" name="tabs" id="tab2" />
             <label
-              for="tab2"
+              htmlFor="tab2"
               role="tab"
               aria-selected="false"
               aria-controls="panel2"
-              tabindex="0"
+              tabIndex="0"
             >
               Sessions
             </label>
             <div
               id="tab-content2"
-              class="tab-content"
+              className="tab-content"
               role="tabpanel"
               aria-labelledby="specification"
               aria-hidden="true"
             >
               {SessionsData.map((session, i) => {
                 return (
-                  <SessionCard key={i} SessionTitle={session.SessionTitle} />
+                  <SessionCard
+                    key={i}
+                    SessionTitle={session.SessionTitle}
+                    SessionDescription={session.SessionDescription}
+                    SessionStart={session.SessionStart}
+                    SessionEnd={session.SessionEnd}
+                  />
                 );
               })}
             </div>
           </li>
         </ul>
-      </section>
+      </div>
     );
   }
 }

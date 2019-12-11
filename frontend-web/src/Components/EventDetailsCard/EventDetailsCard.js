@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FixDateTimeFormat } from "../../utils/FixTimeFormat.js";
+import dateFormat from "dateformat";
 
 //----------------------------IMPORTED COMPONENTS------------------------------
 import EventMapLocation from "../EventMapLocation/EventMapLocation.js";
@@ -60,6 +60,7 @@ class EventDetailsCard extends React.Component {
     }
   };
 
+
   render() {
     const { EventData } = this.state;
     return (
@@ -114,13 +115,13 @@ class EventDetailsCard extends React.Component {
                 When <br />
                 <span>
                   {EventData.start ? (
-                    FixDateTimeFormat(EventData.start, "date")
+                    dateFormat(EventData.start, "fullDate")
                   ) : (
                     <small>Click on event to see date</small>
                   )}
                   <br />
                   {EventData.start
-                    ? FixDateTimeFormat(EventData.start, "time")
+                    ? dateFormat(EventData.start, "isoTime")
                     : ""}
                 </span>
               </li>

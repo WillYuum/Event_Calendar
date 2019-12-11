@@ -1,6 +1,5 @@
 import React from "react";
-
-import { FixDateTimeFormat } from "../../utils/FixTimeFormat.js";
+import dateFormat from "dateformat";
 
 //----------------------------IMPORTED COMPONENTS------------------------------
 import EventMapLocation from "../../Components/EventMapLocation/EventMapLocation.js";
@@ -91,7 +90,7 @@ class EventInfoPage extends React.Component {
 
         <div className="EventInfoPage-body">
           <div className="Eventinfo-left">
-            <div className="description">
+            <div className="Description_Sessions-section">
               <TabSection EventData={EventData} />
             </div>
           </div>
@@ -99,8 +98,8 @@ class EventInfoPage extends React.Component {
           <div className="Eventinfo-right">
             <div className="datetime-section">
               <h3>Date & Time</h3>
-              <p>{FixDateTimeFormat(EventData.EventStartDate, "date")}</p>
-              <time>{FixDateTimeFormat(EventData.EventStartDate, "time")}</time>
+              <p>{dateFormat(EventData.EventStartDate, "fullDate")}</p>
+              <time>{dateFormat(EventData.EventEndDate, "h:MM TT")}</time>
             </div>
             <div className="eventlocation-info">
               <h3>Location</h3>
@@ -111,9 +110,7 @@ class EventInfoPage extends React.Component {
             </div>
           </div>
         </div>
-        <div className="EventInfoPage-footer">
-          <EventMapLocation />
-        </div>
+        {/* <div className="EventInfoPage-footer"><EventMapLocation /></div> */}
       </div>
     );
   }
