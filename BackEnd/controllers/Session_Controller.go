@@ -12,7 +12,7 @@ import (
 
 func HandleGetSessions(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
-
+	
 	//retrieving the event id and changing it to integer
 	param, _ := r.URL.Query()["eventid"]
 	EventID, _ := strconv.Atoi(param[0])
