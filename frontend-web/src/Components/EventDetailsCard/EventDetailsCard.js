@@ -7,7 +7,7 @@ import EventMapLocation from "../EventMapLocation/EventMapLocation.js";
 //----------------------------IMPORTED COMPONENTS------------------------------
 
 //-------------Imported icons-------------------
-import locationIcon from "../../assets/LocationIcon.svg";
+// import locationIcon from "../../assets/LocationIcon.svg";
 //-------------Imported icons-------------------
 
 import "./EventDetailsCard.scss";
@@ -25,7 +25,7 @@ class EventDetailsCard extends React.Component {
   }
 
   // storing backend Url in readable variable
-  Back_Url = process.env.REACT_APP_PORT;
+  Back_UrlPort = process.env.REACT_APP_PORT;
 
   async componentWillReceiveProps(prevProps) {
     if (prevProps) {
@@ -44,12 +44,15 @@ class EventDetailsCard extends React.Component {
    */
   getEventImageById = async eventId => {
     try {
-      const req = await fetch(`${this.Back_Url}/getimages?EventId=` + eventId);
+      const req = await fetch(
+        `${this.Back_UrlPort}/getimages?EventId=` + eventId
+      );
       const result = await req.json();
 
       if (result) {
         this.setState({ EventImage: result[0].Image });
       } else {
+        //return state empty if event doesn't have image
         this.setState({ EventImage: "" });
       }
     } catch (err) {

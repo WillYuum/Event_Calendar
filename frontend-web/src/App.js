@@ -13,9 +13,7 @@ import "./App.scss";
 
 class App extends React.Component {
   calendarComponentRef = React.createRef();
-  state = {
-    events: []
-  };
+  state = {};
 
   render() {
     return (
@@ -32,7 +30,7 @@ class App extends React.Component {
           />
 
           <Route
-            path="event/:id"
+            path={["/event/:id", "/event"]}
             render={props => {
               return <EventInfoPage {...props} />;
             }}
