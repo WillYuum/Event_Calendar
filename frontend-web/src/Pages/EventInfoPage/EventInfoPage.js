@@ -81,7 +81,9 @@ class EventInfoPage extends React.Component {
             <div className="rightInfo-block">
               <div className="EventTitle-block">
                 <h1>{EventData.EventName}</h1>
-                <p>Hosted by {EventData.HostName}</p>
+                <p>
+                  Hosted by <span>{EventData.HostName}</span>
+                </p>
               </div>
               <button className="AttendButton">Attend</button>
             </div>

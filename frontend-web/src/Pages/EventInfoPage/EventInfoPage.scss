@@ -1,6 +1,8 @@
 $leftSectionWidth: 65%;
 $rightSectionWidth: 25%;
 
+$blue: #4d648d;
+
 .EventInfoPage-container {
   width: 55vw;
   margin: 100px auto;
@@ -32,13 +34,28 @@ $rightSectionWidth: 25%;
           h1 {
             margin-top: 40px;
             font-size: 30px;
+            color: $blue;
+          }
+
+          p {
+            span {
+              color: $blue;
+            }
           }
         }
 
         .AttendButton {
+          background-color: white;
+          border-color: $blue;
           width: 100px;
           height: 40px;
           margin: 0 auto;
+          color: $blue;
+
+          &:hover {
+            background-color: $blue;
+            color: white;
+          }
         }
       }
     }
@@ -55,7 +72,7 @@ $rightSectionWidth: 25%;
       width: $leftSectionWidth;
       height: 400px;
 
-      .Description_Sessions-section{
+      .Description_Sessions-section {
         height: 100%;
       }
     }
@@ -66,6 +83,17 @@ $rightSectionWidth: 25%;
 
       .datetime-section {
         margin-bottom: 50px;
+
+        p,
+        time {
+          color: $blue;
+        }
+      }
+    }
+
+    .eventlocation-info {
+      p {
+        color: $blue;
       }
     }
   }

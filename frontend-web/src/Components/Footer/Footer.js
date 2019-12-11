@@ -14,6 +14,13 @@ class Footer extends React.Component {
         return ( 
             <div className="Footer-container">
 
+
+
+            
+
+
+
+
             </div>
          );
     }
