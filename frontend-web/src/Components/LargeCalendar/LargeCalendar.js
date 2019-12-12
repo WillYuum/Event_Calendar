@@ -82,7 +82,7 @@ class LargeCalendar extends React.Component {
     const { Events } = this.state;
 
     return (
-      <div className="LargeCalendar-container">
+      <div id="largeCalendar"className="LargeCalendar-container">
         <FullCalendar
           defaultView="dayGridMonth"
           height={800}
