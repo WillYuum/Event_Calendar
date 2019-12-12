@@ -2,7 +2,6 @@
   background-color: #fff;
   height: 100%;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-
   //image section of event details card
   .TopPart {
     border-start-end-radius: 20px;
@@ -20,6 +19,7 @@
   .bottomPart {
     height: 60%;
     padding: 5%;
+
     .EventBriefInfo {
       display: flex;
       flex-direction: column;
@@ -78,10 +78,9 @@
         }
         //----------first section in list------------
 
-
-        .leaflet-container{
+        .leaflet-container {
           height: 200px;
-      }
+        }
       }
     }
   }

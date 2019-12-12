@@ -1,4 +1,4 @@
-$SideNavBackgroundColor: #380096;
+$SideNavBackgroundColor: #4d648d;
 
 .Navigation-container {
   position: relative;
@@ -7,7 +7,7 @@ $SideNavBackgroundColor: #380096;
     color: white;
   }
   .burgurIcon {
-    fill: #380096;
+    fill: #4d648d;
   }
   .content-wrapper {
     height: 100vh;
@@ -24,11 +24,13 @@ $SideNavBackgroundColor: #380096;
     top: 20px;
     cursor: pointer;
   }
-
-  .Nav-logo {
+  
+  .Nav-logo{
     text-align: center;
   }
   .nav {
+
+
     &-offcanvas {
       width: 300px;
       background: $SideNavBackgroundColor;
@@ -76,6 +78,7 @@ $SideNavBackgroundColor: #380096;
                 transform: translateX(10px);
               }
             }
+            
           }
         }
       }

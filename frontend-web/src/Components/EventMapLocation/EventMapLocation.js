@@ -1,7 +1,8 @@
 import React from "react";
-
+import LCG from "leaflet-control-geocoder";
 //--------------Leaflet Components------------------
 import { Map, Marker, Popup, TileLayer } from "react-leaflet";
+import L from "leaflet";
 //--------------Leaflet Components------------------
 
 import "./EventMapLocation.scss";
@@ -12,14 +13,23 @@ class EventMapLocation extends React.Component {
     this.state = {
       lat: 33.892314,
       lng: 35.504858,
-      zoom: 13
+      zoom: 15
     };
   }
+
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
       <div className="EventMapLocation">
-        <Map center={position} zoom={this.state.zoom} scrollWheelZoom={false}>
+        <Map
+          center={position}
+          zoom={this.state.zoom}
+          scrollWheelZoom={false}
+          ref={m => {
+            console.log(m)
+          }}
+        >
+          >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2lsbHl1bXMiLCJhIjoiY2szeWFrYTBtMDNxMjNrbjh3cXR6NmViZyJ9.THjxOxZctWlNVPcyQ6Y7Gg"

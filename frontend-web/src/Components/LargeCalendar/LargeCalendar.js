@@ -5,7 +5,6 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 //---------------FullCalendar modules----------------
 
-
 //--------FullCalendar css-----------
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
@@ -16,7 +15,8 @@ class LargeCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      Events: []
+      Events: [],
+      isCreatingEvent: false
     };
   }
 
@@ -73,28 +73,75 @@ class LargeCalendar extends React.Component {
     getEventData(Event);
   };
 
+
+
+
   //selecting the range of date for creating event
   handleSelectedDates = info => {
     alert("selected " + info.startStr + " to " + info.endStr);
+    return {
+      EventStartDate: info.startStr,
+      EventEndDate: info.endStr
+    }
   };
 
+
+  
+  ToggleCreateMode = () => {
+    const CreateMode = !this.state.isCreatingEvent;
+    this.setState({ isCreatingEvent: CreateMode });
+  };
+
+  handleCreateEvent = async() => {
+    // const DateSelected = 
+  };
+
+  handleDisplayButtons() {
+    if (this.state.isCreatingEvent) {
+      return "CreateEvent Cancel";
+    } else {
+      return "NewEvent";
+    }
+  }
+
   render() {
-    const { Events } = this.state;
+    const { Events, isCreatingEvent } = this.state;
 
     return (
-      <div id="largeCalendar"className="LargeCalendar-container">
+      <div id="largeCalendar" className="LargeCalendar-container">
         <FullCalendar
           defaultView="dayGridMonth"
           height={800}
           plugins={[dayGridPlugin, interactionPlugin]}
+          //Custom Button for creating event
+          customButtons={{
+            NewEvent: {
+              text: "New Event",
+              click: this.ToggleCreateMode
+            },
+            CreateEvent: {
+              text: "Create Event",
+              click: this.handleCreateEvent
+            },
+            Cancel: {
+              text: "Cancel",
+              click: this.ToggleCreateMode
+            }
+          }}
+          //buttons that are displayed on header of calendar
           header={{
             left: "prev,next today",
-            center: "title",
-            right: ""
+            center: (() => {
+              return isCreatingEvent ? "Add event date" : "title";
+            })(),
+            right: (() => {
+              return isCreatingEvent ? "CreateEvent Cancel" : "NewEvent";
+            })()
           }}
+          //giving the calendar the event data
           events={Events}
           eventClick={this.handleEventClick}
-          selectable={false}
+          selectable={isCreatingEvent ? true : false}
           select={this.handleSelectedDates}
           eventLimit={3}
         />
