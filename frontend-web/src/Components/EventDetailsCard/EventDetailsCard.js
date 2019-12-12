@@ -27,11 +27,11 @@ class EventDetailsCard extends React.Component {
   // storing backend Url in readable variable
   Back_UrlPort = process.env.REACT_APP_PORT;
 
-  async componentWillReceiveProps(prevProps) {
-    if (prevProps) {
+  async UNSAFE_componentWillReceiveProps(prevProps, prevState) {
+    if (prevProps.EventData.length !== 0) {
       await this.setState({ EventData: prevProps.EventData[0] });
-      await console.log(this.state.EventData.id);
       await this.getEventImageById(this.state.EventData.id);
+      return;
     } else {
       return;
     }
@@ -59,7 +59,6 @@ class EventDetailsCard extends React.Component {
       throw new Error(err);
     }
   };
-
 
   render() {
     const { EventData } = this.state;

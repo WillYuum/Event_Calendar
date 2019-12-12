@@ -1,20 +1,103 @@
-.NavBar-container {
-  background-color: #4D648D;
-  width: 100%;
-  height: 80px;
-  .content {
-    padding: 20px;
-    display: flex;
-    justify-content: space-between;
-    .Logo-Container {
-    }
+$SideNavBackgroundColor: #4d648d;
 
-    .navigationBtns-container {
-      display: table;
-      li {
-        font-size: 18px;
-        list-style: none;
+.Navigation-container {
+  position: relative;
+  h1 {
+    font-size: 50px;
+    color: white;
+  }
+  .burgurIcon {
+    fill: #4d648d;
+  }
+  .content-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #4d648d;
+  }
+  .hamburger {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
+
+  .Nav-logo {
+    text-align: center;
+  }
+  .nav {
+    &-offcanvas {
+      width: 300px;
+      background: $SideNavBackgroundColor;
+      height: 100vh;
+      position: fixed;
+      overflow-x: auto;
+      z-index: 2000;
+      padding: 50px 0;
+      top: 0;
+      left: -300px;
+      transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      .close {
+        position: absolute;
+        right: 10px;
+        top: 20px;
+        outline: 0;
+        opacity: 1;
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        cursor: pointer;
+        transition: 0.3s ease;
+
+        &:hover {
+          transform: rotate(90deg);
+        }
       }
+      &-menu {
+        ul {
+          margin-bottom: 0;
+          padding-left: 0;
+          list-style: none;
+          li {
+            a {
+              color: white;
+              font-size: 16px;
+              font-weight: 300;
+              padding: 10px 40px;
+              display: block;
+              text-decoration: none;
+              position: relative;
+              z-index: 1;
+              transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.05s;
+              &:hover {
+                transform: translateX(10px);
+              }
+            }
+          }
+        }
+      }
+      &.open {
+        left: 0;
+      }
+    }
+  }
+
+  .offcanvas-overlay {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: 1999;
+    transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    visibility: hidden;
+    opacity: 0;
+    &.on {
+      opacity: 1;
+      visibility: visible;
     }
   }
 }
