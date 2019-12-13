@@ -12,6 +12,11 @@ import EventMapLocation from "../EventMapLocation/EventMapLocation.js";
 
 import "./EventDetailsCard.scss";
 
+/**
+ *
+ * @class EventDetailsCard
+ * @extends {React.Component}
+ */
 class EventDetailsCard extends React.Component {
   constructor(props) {
     super(props);
@@ -129,7 +134,7 @@ class EventDetailsCard extends React.Component {
               {/* {----------------------MAP SECTION---------------------} */}
               <li>
                 Where <br />
-                <EventMapLocation />
+                {/* <EventMapLocation /> */}
               </li>
             </ul>
           </div>

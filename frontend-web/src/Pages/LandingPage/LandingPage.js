@@ -3,7 +3,6 @@ import React from "react";
 //-------------IMPORTED COMPONENTS----------------------
 import LargeCalendar from "../../Components/LargeCalendar/LargeCalendar.js";
 import EventDetailsCard from "../../Components/EventDetailsCard/EventDetailsCard.js";
-import CreateEventModal from "../../Components/CreateEventModel/CreateEventModel.js";
 //-------------IMPORTED COMPONENTS----------------------
 
 import "./LandingPage.scss";
@@ -46,7 +45,7 @@ class LandingPage extends React.Component {
             <EventDetailsCard EventData={EventData} />
           </div>
         </div>
-        <CreateEventModal show={true}/>
+        
       </div>
     );
   }

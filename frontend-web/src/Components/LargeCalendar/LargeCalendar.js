@@ -5,18 +5,30 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 //---------------FullCalendar modules----------------
 
+//---------------IMPORTED COMPONENT----------------
+import CreateEventModal from "../../Components/CreateEventModel/CreateEventModel.js";
+//---------------IMPORTED COMPONENT----------------
+
 //--------FullCalendar css-----------
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/daygrid/main.css";
 //--------FullCalendar css-----------
 import "./LargeCalendar.scss";
 
+/**
+ *
+ *
+ * @class LargeCalendar
+ * @extends {React.Component}
+ */
 class LargeCalendar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       Events: [],
-      isCreatingEvent: false
+      isCreatingEvent: false,
+      ToggleShowModal: false,
+      CreateEventData: ""
     };
   }
 
@@ -73,27 +85,18 @@ class LargeCalendar extends React.Component {
     getEventData(Event);
   };
 
-
-
-
   //selecting the range of date for creating event
   handleSelectedDates = info => {
-    alert("selected " + info.startStr + " to " + info.endStr);
-    return {
-      EventStartDate: info.startStr,
-      EventEndDate: info.endStr
-    }
+    //pop up the modal
+    this.setState({ ToggleShowModal: true });
+
+    //saving the select dates data in state to send it to the model
+    this.setState({ CreateEventData: info });
   };
 
-
-  
   ToggleCreateMode = () => {
     const CreateMode = !this.state.isCreatingEvent;
     this.setState({ isCreatingEvent: CreateMode });
-  };
-
-  handleCreateEvent = async() => {
-    // const DateSelected = 
   };
 
   handleDisplayButtons() {
@@ -104,8 +107,17 @@ class LargeCalendar extends React.Component {
     }
   }
 
+  handleCloseModal = () => {
+    this.setState({ ToggleShowModal: false });
+  };
+
   render() {
-    const { Events, isCreatingEvent } = this.state;
+    const {
+      Events,
+      isCreatingEvent,
+      ToggleShowModal,
+      CreateEventData
+    } = this.state;
 
     return (
       <div id="largeCalendar" className="LargeCalendar-container">
@@ -140,10 +152,18 @@ class LargeCalendar extends React.Component {
           }}
           //giving the calendar the event data
           events={Events}
+
+          //when user clicks on event this function runs
           eventClick={this.handleEventClick}
           selectable={isCreatingEvent ? true : false}
           select={this.handleSelectedDates}
           eventLimit={3}
+        />
+
+        <CreateEventModal
+          showModal={ToggleShowModal}
+          handleCloseModal={this.handleCloseModal}
+          CreateEventData={CreateEventData}
         />
       </div>
     );
