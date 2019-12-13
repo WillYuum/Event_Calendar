@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Components/EventDetailsCard/EventDetailsCard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Components/EventDetailsCard/EventDetailsCard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import { Link } from "react-router-dom";
+import dateFormat from "dateformat";
+
+//----------------------------IMPORTED COMPONENTS------------------------------
+import EventMapLocation from "../EventMapLocation/EventMapLocation.js";
+//----------------------------IMPORTED COMPONENTS------------------------------
+
+//-------------Imported icons-------------------
+// import locationIcon from "../../assets/LocationIcon.svg";
+//-------------Imported icons-------------------
+
+import "./EventDetailsCard.scss";
+
+/**
+ *
+ * @class EventDetailsCard
+ * @extends {React.Component}
+ */
+class EventDetailsCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      EventData: "",
+      EventImage: "",
+      lat: 33.892314,
+      lng: 35.504858,
+      zoom: 13
+    };
+  }
+
+  // storing backend Url in readable variable
+  Back_UrlPort = process.env.REACT_APP_PORT;
+
+  async UNSAFE_componentWillReceiveProps(prevProps, prevState) {
+    if (prevProps.EventData.length !== 0) {
+      await this.setState({ EventData: prevProps.EventData[0] });
+      await this.getEventImageById(this.state.EventData.id);
+      return;
+    } else {
+      return;
+    }
+  }
+
+  /**
+   * @function getEventImage - getting image from specific event to display it to it to the user
+   *
+   * @memberof EventDetailsCard
+   */
+  getEventImageById = async eventId => {
+    try {
+      const req = await fetch(
+        `${this.Back_UrlPort}/getimages?EventId=` + eventId
+      );
+      const result = await req.json();
+
+      if (result) {
+        this.setState({ EventImage: result[0].Image });
+      } else {
+        //return state empty if event doesn't have image
+        this.setState({ EventImage: "" });
+      }
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
+
+  render() {
+    const { EventData } = this.state;
+    return (
+      &lt;div className="EventDetailsCard-cotainer">
+        {/* {-----------------------IMAGE SECTION---------------------} */}
+        &lt;div className="TopPart">
+          &lt;div
+            className="EventImage"
+            style={{
+              backgroundImage:
+                "url('data:image/png;base64," + this.state.EventImage + "')"
+            }}
+          >&lt;/div>
+        &lt;/div>
+        {/* {-----------------------IMAGE SECTION---------------------} */}
+
+        &lt;div className="bottomPart">
+          &lt;div className="EventBriefInfo">
+            &lt;ul className="listOfBriefInfo">
+              {/* {-------------------Event Title section---------------} */}
+
+              &lt;h2 className="EventTitle">
+                {EventData.title ? (
+                  EventData.title
+                ) : (
+                  &lt;small>Click on event to see title&lt;/small>
+                )}
+              &lt;/h2>
+              {/* {-------------------Event Title section---------------} */}
+
+              {/* {-------------------HostName &amp; moreInfo button section---------------} */}
+              &lt;div className="hostName-infoBtn">
+                &lt;li>
+                  Host's Name
+                  &lt;br />
+                  &lt;span>
+                    {EventData.HostName ? (
+                      EventData.HostName
+                    ) : (
+                      &lt;small>Click on event to see title&lt;/small>
+                    )}
+                  &lt;/span>
+                &lt;/li>
+                &lt;Link className="MoreInfoBtn" to={`/event/${EventData.id}`}>
+                  &lt;p className="btnText">More Info&lt;/p>
+                &lt;/Link>
+              &lt;/div>
+              {/* {-------------------HostName &amp; moreInfo button section---------------} */}
+
+              {/* {-------------------Date and Time section---------------} */}
+              &lt;li>
+                When &lt;br />
+                &lt;span>
+                  {EventData.start ? (
+                    dateFormat(EventData.start, "fullDate")
+                  ) : (
+                    &lt;small>Click on event to see date&lt;/small>
+                  )}
+                  &lt;br />
+                  {EventData.start
+                    ? dateFormat(EventData.start, "isoTime")
+                    : ""}
+                &lt;/span>
+              &lt;/li>
+              {/* {-------------------Date and Time section---------------} */}
+
+              {/* {----------------------MAP SECTION---------------------} */}
+              &lt;li>
+                Where &lt;br />
+                {/* &lt;EventMapLocation /> */}
+              &lt;/li>
+            &lt;/ul>
+          &lt;/div>
+          {/* {----------------------MAP SECTION---------------------} */}
+        &lt;/div>
+      &lt;/div>
+    );
+  }
+}
+
+export default EventDetailsCard;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EventDetailsCard.html">EventDetailsCard</a></li><li><a href="LargeCalendar.html">LargeCalendar</a></li><li><a href="SessionCard.html">SessionCard</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Dec 13 2019 17:37:49 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

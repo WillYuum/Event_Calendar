@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Pages/EventInfoPage/EventInfoPage.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Pages/EventInfoPage/EventInfoPage.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from "react";
+import dateFormat from "dateformat";
+
+//----------------------------IMPORTED COMPONENTS------------------------------
+import EventMapLocation from "../../Components/EventMapLocation/EventMapLocation.js";
+import TabSection from "../../Components/TabSection/TabSection.js";
+//----------------------------IMPORTED COMPONENTS------------------------------
+
+import "./EventInfoPage.scss";
+
+//EventInfoPage will display detailed information about a specific event
+class EventInfoPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      EventData: "",
+      EventImage: "" //store image in state as base64
+    };
+  }
+
+  // storing backend Url in readable variable
+  Back_UrlPort = process.env.REACT_APP_PORT;
+
+  async componentDidMount() {
+    //getting the event id from react router url
+    const EventId = this.props.match.params.id;
+    this.fetchEventData(EventId);
+  }
+
+  /**
+   *@function fetchEventData - fetch a specific event with event id
+   *@param {int} EventId
+   * @memberof EventInfoPage
+   */
+  fetchEventData = async Eventid => {
+    try {
+      const req = await fetch(`${this.Back_UrlPort}/event?eventid=` + Eventid);
+      const result = await req.json();
+
+      this.setState({ EventData: result });
+      //fetching image using same event id
+      this.fetchEventImage(Eventid);
+    } catch (err) {
+      throw new Error(
+        `fetching event data with id = ${Eventid} failed with ${err}`
+      );
+    }
+  };
+
+  /**
+   *@function fetchEventImage - fetch the base64 image from api
+   *@param {int} EventId
+   * @memberof EventInfoPage
+   */
+  fetchEventImage = async EventId => {
+    try {
+      const req = await fetch(
+        `${this.Back_UrlPort}/getimages?EventId=` + EventId
+      );
+      const result = await req.json();
+
+      this.setState({ EventImage: result[0].Image });
+    } catch (err) {
+      throw new Error(`fetch event image failed with ${err}`);
+    }
+  };
+
+  render() {
+    const { EventData, EventImage } = this.state;
+    console.log(EventData);
+    return (
+      &lt;div className="EventInfoPage-container">
+        &lt;div className="EventInfoPage-header">
+          &lt;div
+            className="EventImage-container"
+            style={{
+              backgroundImage: "url('data:image/png;base64," + EventImage + "')"
+            }}
+          >&lt;/div>
+          &lt;div className="rightInfo">
+            &lt;div className="rightInfo-block">
+              &lt;div className="EventTitle-block">
+                &lt;h1>{EventData.EventName}&lt;/h1>
+                &lt;p>
+                  Hosted by &lt;span>{EventData.HostName}&lt;/span>
+                &lt;/p>
+              &lt;/div>
+              &lt;button className="AttendButton">Attend&lt;/button>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+
+        &lt;div className="EventInfoPage-body">
+          &lt;div className="Eventinfo-left">
+            &lt;div className="Description_Sessions-section">
+              &lt;TabSection EventData={EventData} />
+            &lt;/div>
+          &lt;/div>
+
+          &lt;div className="Eventinfo-right">
+            &lt;div className="datetime-section">
+              &lt;h3>Date &amp; Time&lt;/h3>
+              &lt;p>{dateFormat(EventData.EventStartDate, "fullDate")}&lt;/p>
+              &lt;time>{dateFormat(EventData.EventEndDate, "h:MM TT")}&lt;/time>
+            &lt;/div>
+            &lt;div className="eventlocation-info">
+              &lt;h3>Location&lt;/h3>
+              &lt;p>
+                Nihil aperiam voluptatum ullam, assumenda soluta aut ad,
+                suscipit vel{" "}
+              &lt;/p>
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+        {/* &lt;div className="EventInfoPage-footer">&lt;EventMapLocation />&lt;/div> */}
+      &lt;/div>
+    );
+  }
+}
+
+export default EventInfoPage;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="EventDetailsCard.html">EventDetailsCard</a></li><li><a href="LargeCalendar.html">LargeCalendar</a></li><li><a href="SessionCard.html">SessionCard</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Fri Dec 13 2019 17:37:49 GMT+0200 (Eastern European Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
