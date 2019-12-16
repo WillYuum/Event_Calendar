@@ -8,60 +8,19 @@ import {
   SafeAreaView
 } from "react-native";
 
+import { createAppContainer } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
+
 //---------------------IMPORTED COMPONENTS------------------
-import EventScreen from "./src/Screens/EventsScreen";
-import NavigatorBar from "./src/components/NavigatorBar.js";
+// import NavigatorBar from "./src/components/NavigatorBar.js";
+
+import EventScreen from "./src/View/Screens/EventScreen/EventScreen.js";
 //---------------------IMPORTED COMPONENTS------------------
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      EventsData: []
-    };
-  }
-
-  async componentDidMount() {
-    await this.getEvents();
-  }
-
-  getEvents = async () => {
-    try {
-      const req = await fetch("http://192.168.0.123:3000/events", {
-        method: "GET"
-      });
-      const res = await req.json();
-      await this.setState({ EventsData: res.rows });
-    } catch (err) {
-      throw new Error(`failed fetching events with = ${err}`);
-    }
-  };
-
-  render() {
-    //Styling variables
-    const { background, content } = AppStyle;
-
-    //State data
-    const { EventsData } = this.state;
-    return (
-      <View style={background}>
-        <View style={content}>
-          <EventScreen EventsData={EventsData} />
-        </View>
-        <NavigatorBar />
-      </View>
-    );
-  }
-}
-
-const AppStyle = StyleSheet.create({
-  background: {
-    flex: 1
-  },
-  content: {
-    width: "100%",
-    height: "100%"
-  }
+const MainNavigator = createStackNavigator({
+  Home: { screen: EventScreen }
 });
+
+const App = createAppContainer(MainNavigator);
 
 export default App;
