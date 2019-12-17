@@ -1,16 +1,21 @@
 import { StyleSheet } from "react-native";
 
 export const EventScreenStyle = StyleSheet.create({
-  PageContainer: {
+  ScreenContainer: {
     flex: 1,
-    width: "100%",
+    flexDirection: "column",
+    position: "relative"
+  },
+
+  ScrollViewStyle: {
+    flexDirection: "column",
     height: "100%"
   },
 
   BackgroundIntro: {
     backgroundColor: "purple",
     width: "100%",
-    height: "40%"
+    height: "50%"
   },
 
   WelcomeText: {
@@ -21,8 +26,7 @@ export const EventScreenStyle = StyleSheet.create({
   },
 
   latestEventPos: {
-    position: "absolute",
-    top: "15%",
+    marginTop: -35,
     width: "95%",
     height: 275,
     alignSelf: "center"

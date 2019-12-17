@@ -1,13 +1,13 @@
 import React from "react";
-import {render} from "./Controller.js"
+import { render } from "./Controller.js";
 import TodoList from "../Models/Event.js";
 
+/**
+ *
+ */
+export const fetchAllEvents = () => {
+  const todoListController = new TodoList();
+  return todoListController.getAllEvents();
+};
 
-const fetchAllEvents = () =>{
-    return () =>{
-        return TodoList.getAllEvents
-    }
-}
-
-
-export const ShowEventScree
+// export const ShowEventScreen

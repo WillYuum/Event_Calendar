@@ -4,13 +4,18 @@ import {
   View,
   TouchableHighlight,
   ScrollView,
-  TouchableNativeFeedback
+  SafeAreaView,
+  TouchableNativeFeedback,
+  ListView,
+  FlatList,
+  StyleSheet
 } from "react-native";
+
+import { fetchAllEvents } from "../../../Controllers/EventController.js";
 
 //-------------------IMPORTED COMPONENTS--------------------
 import LatestEventCard from "../../Components/LargeEventCardView/LargeEventCardView.js";
 import MapSmallCardEvent from "../../MapComponents/MapSmallCardEvents.js";
-
 //-------------------IMPORTED COMPONENTS--------------------
 
 //importing stylesheet file
@@ -23,40 +28,60 @@ import { EventScreenStyle } from "./EventScreenStyle.js";
  * @extends {React.Component}
  */
 class EventScreen extends React.Component {
-  static navigationOptions = {
-    title: "Welcome"
-  };
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      EventsData: []
+    };
   }
+
+  async componentDidMount() {
+    await this.getEvents();
+  }
+
+  /**
+   * @function getEvents using the route controller from EventController.js to retrieve events
+   *
+   * @memberof EventScreen
+   */
+  getEvents = async () => {
+    const EventsData = await fetchAllEvents();
+    this.setState({ EventsData });
+  };
+
   render() {
+    const { EventsData } = this.state;
+    console.log(EventsData);
+
     //Styling variables
     const {
+      ScreenContainer,
+      ScrollViewStyle,
       BackgroundIntro,
       WelcomeText,
-      PageContainer,
       latestEventPos
     } = EventScreenStyle;
 
-    //if not loading to return the Latest event component(LatestEventCard.js)
-    // let latestEvent;
-    // if (EventsData.length > 0) {
-    //   latestEvent = <LatestEvent Title={"POPCORN"} />;
-    // } else {
-    //   latestEvent = <Text>Loading...</Text>;
-    // }
+    // if not loading to return the Latest event component(LatestEventCard.js)
+    let latestEvent;
+    if (EventsData.length != 0) {
+      latestEvent = <LatestEventCard Title={"POPCORN"} />;
+    } else {
+      latestEvent = <Text>Loading...</Text>;
+    }
     return (
-      <ScrollView style={PageContainer}>
-        <View style={BackgroundIntro}>
-          <Text style={WelcomeText}>Welcome back,{"\n"} William</Text>
+      <View style={ScreenContainer}>
+        <View>
+          <ScrollView style={ScrollViewStyle}>
+            <View style={BackgroundIntro}>
+              <Text style={WelcomeText}>Welcome back,{"\n"} William</Text>
+            </View>
+            <View>
+              <View style={latestEventPos}>{latestEvent}</View>
+            </View>
+          </ScrollView>
         </View>
-        {/* <TouchableNativeFeedback style={latestEventPos}>
-          {latestEvent}
-        </TouchableNativeFeedback> */}
-
-        {/* <MapSmallCardEvent EventsData={EventsData} /> */}
-      </ScrollView>
+      </View>
     );
   }
 }
