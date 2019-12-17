@@ -15,7 +15,7 @@ export const EventScreenStyle = StyleSheet.create({
   BackgroundIntro: {
     backgroundColor: "purple",
     width: "100%",
-    height: "50%"
+    height: 250
   },
 
   WelcomeText: {

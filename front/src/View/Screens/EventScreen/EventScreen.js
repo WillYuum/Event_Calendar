@@ -79,6 +79,7 @@ class EventScreen extends React.Component {
             <View>
               <View style={latestEventPos}>{latestEvent}</View>
             </View>
+            <MapSmallCardEvent EventsData={EventsData} />
           </ScrollView>
         </View>
       </View>

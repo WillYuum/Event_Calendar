@@ -17,6 +17,7 @@ class MapEvents extends React.Component {
   }
   render() {
     const { EventsData } = this.props;
+    const { container } = SmallEventCard;
     return (
       <View style={container}>
         {EventsData.map((event, index) => {

@@ -27,6 +27,8 @@ class SmallEventCardView extends React.Component {
       EventDate
     } = SmallEventCardStyle;
 
+    const { Title, Host } = this.props;
+
     //static image
     let Image_Http_URL = {
       uri:
