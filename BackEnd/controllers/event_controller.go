@@ -29,6 +29,25 @@ func HandleGetEvent(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", data)
 }
 
+func HandleGetLatestEvents(w http.ResponseWriter, r *http.Request){
+	utils.EnableCors(&w)
+
+	//giving type to events var
+	var events models.Events
+	//adding the data fetched from database and added to events
+	events = models.GetLatestEvents()
+
+	// changing the array of strings to json
+	data, err := json.Marshal(events.AllEvents)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	//sending the events data to the client side
+	fmt.Fprintf(w, "%s", data)
+}
+
+
 func HandleGetEventById(w http.ResponseWriter, r *http.Request){
 	utils.EnableCors(&w)
 

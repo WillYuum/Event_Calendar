@@ -57,6 +57,42 @@ func GetEvents() Events {
 	return events
 }
 
+//retrieves events that are after today's current date
+func GetLatestEvents() Events{
+	//initialized var with array empty array of type Events
+	events := Events{}
+
+	sqlStmt := `SELECT * FROM public."Event" 
+	WHERE "EventStartDate" > CURRENT_TIMESTAMP
+	ORDER BY "EventStartDate" ASC`
+
+	rows, err := db.Query(sqlStmt)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	//looping through the event data
+	for rows.Next() {
+		event := Event{}
+		err := rows.Scan(
+			&event.EventID,
+			&event.EventName,
+			&event.EventDescription,
+			&event.HostName,
+			&event.EventStartDate,
+			&event.EventEndDate,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		//adding the row to the  allEvent array
+		events.AllEvents = append(events.AllEvents, event)
+	}
+	//returning the array with all rows
+	return events
+}
+
 func GetEventById(EventId int)Event{
 	//query to get event depending on  event id
 	sqlStmt := `SELECT "EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate"
