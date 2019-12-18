@@ -1,14 +1,19 @@
 import React from "react";
 import { View, Image, Text } from "react-native";
 
+import dateFormat from "dateformat";
+
 //import stylesheet file
 import { LatestEventStyle } from "./LargeEventCardStyle.js";
 
 /**
  *
- *
  * @class LargeEventCardView
  * @extends {Component}
+ *
+ * @prop {string} EventTitle - Title displayed for event
+ * @prop {string} HostName - Name of the event host
+ * @prop {Date} EventStartDate
  */
 class LargeEventCardView extends React.Component {
   constructor(props) {
@@ -26,7 +31,7 @@ class LargeEventCardView extends React.Component {
       detailsContainer,
       EventMonth,
       EventDay,
-      EventTitle,
+      EventTitleStyle,
       EventHost
     } = LatestEventStyle;
 
@@ -37,7 +42,7 @@ class LargeEventCardView extends React.Component {
     };
 
     //receiving props from controller
-    const { Title, Host } = this.props;
+    const { EventTitle, HostName, EventStartDate } = this.props;
     return (
       <View style={CardContainer}>
         <View style={ImageContainer}>
@@ -45,12 +50,12 @@ class LargeEventCardView extends React.Component {
         </View>
         <View style={EventInfo}>
           <View style={dateContainer}>
-            <Text style={EventMonth}>Jan</Text>
-            <Text style={EventDay}>5</Text>
+            <Text style={EventMonth}>{dateFormat(EventStartDate, "mmm")}</Text>
+            <Text style={EventDay}>{dateFormat(EventStartDate, "dd")}</Text>
           </View>
           <View style={detailsContainer}>
-            <Text style={EventTitle}>{Title}</Text>
-            <Text style={EventHost}>by {Host}</Text>
+            <Text style={EventTitleStyle}>{EventTitle}</Text>
+            <Text style={EventHost}>by {HostName}</Text>
           </View>
         </View>
       </View>

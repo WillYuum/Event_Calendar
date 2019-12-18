@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
 
+import dateformat from "dateformat";
+
 //importing stylesheet file
 import { SmallEventCardStyle } from "./SmallEventCardStyle.js";
 
@@ -27,7 +29,7 @@ class SmallEventCardView extends React.Component {
       EventDate
     } = SmallEventCardStyle;
 
-    const { Title, Host } = this.props;
+    const { Title, Host, EventStartDate } = this.props;
 
     //static image
     let Image_Http_URL = {
@@ -42,7 +44,9 @@ class SmallEventCardView extends React.Component {
         <View style={EventInfo}>
           <Text style={EventTitle}>{Title}</Text>
           <Text style={EventHost}>by {Host}</Text>
-          <Text style={EventDate}>Thursday 12, 8, 2019</Text>
+          <Text style={EventDate}>
+            {dateformat(EventStartDate, "ddd, mmm dd - HH:MM TT")}
+          </Text>
         </View>
       </View>
     );

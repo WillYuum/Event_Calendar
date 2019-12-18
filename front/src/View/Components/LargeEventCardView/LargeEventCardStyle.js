@@ -52,7 +52,7 @@ export const LatestEventStyle = StyleSheet.create({
     textAlign: "center"
   },
 
-  EventTitle: {
+  EventTitleStyle: {
     fontSize: 25
   },
 

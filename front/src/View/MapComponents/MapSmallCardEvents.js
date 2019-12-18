@@ -20,12 +20,13 @@ class MapEvents extends React.Component {
     const { container } = SmallEventCard;
     return (
       <View style={container}>
-        {EventsData.map((event, index) => {
+        {EventsData.slice(1).map((event, index) => {
           return (
             <SmallEventCard
               key={index}
               Title={event.EventName}
               Host={event.HostName}
+              EventStartDate={event.EventStartDate}
             />
           );
         })}

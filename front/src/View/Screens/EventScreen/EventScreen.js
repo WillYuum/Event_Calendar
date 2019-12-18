@@ -65,7 +65,13 @@ class EventScreen extends React.Component {
     // if not loading to return the Latest event component(LatestEventCard.js)
     let latestEvent;
     if (EventsData.length != 0) {
-      latestEvent = <LatestEventCard Title={"POPCORN"} />;
+      latestEvent = (
+        <LatestEventCard
+          EventTitle={EventsData[0].EventName}
+          HostName={EventsData[0].HostName}
+          EventStartDate={EventsData[0].EventStartDate}
+        />
+      );
     } else {
       latestEvent = <Text>Loading...</Text>;
     }
@@ -73,13 +79,21 @@ class EventScreen extends React.Component {
       <View style={ScreenContainer}>
         <View>
           <ScrollView style={ScrollViewStyle}>
+            {/*------------------INTRO SECTION-----------------------*/}
             <View style={BackgroundIntro}>
               <Text style={WelcomeText}>Welcome back,{"\n"} William</Text>
             </View>
+            {/*------------------INTRO SECTION-----------------------*/}
+
+            {/*---------------LATEST EVENT CARD-----------------------*/}
             <View>
               <View style={latestEventPos}>{latestEvent}</View>
             </View>
+            {/*---------------LATEST EVENT CARD-----------------------*/}
+
+            {/*-------------------Display all upcoming events--------------------*/}
             <MapSmallCardEvent EventsData={EventsData} />
+            {/*-------------------Display all upcoming events--------------------*/}
           </ScrollView>
         </View>
       </View>
