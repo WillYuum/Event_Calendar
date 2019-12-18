@@ -104,6 +104,7 @@ func GetEventById(EventId int)Event{
 
 	//retrieving data from database
 	row := db.QueryRow(sqlStmt, EventId)
+	
 
 	//creating structure for variable and adding the row value to it
 	event := Event{}
