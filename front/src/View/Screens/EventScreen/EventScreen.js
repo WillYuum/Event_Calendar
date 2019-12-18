@@ -1,17 +1,5 @@
 import React from "react";
-import {
-  Text,
-  View,
-  TouchableHighlight,
-  ScrollView,
-  SafeAreaView,
-  TouchableNativeFeedback,
-  ListView,
-  FlatList,
-  StyleSheet
-} from "react-native";
-
-import { fetchAllEvents } from "../../../Controllers/EventController.js";
+import { Text, View, ScrollView } from "react-native";
 
 //-------------------IMPORTED COMPONENTS--------------------
 import LatestEventCard from "../../Components/LargeEventCardView/LargeEventCardView.js";
@@ -36,18 +24,13 @@ class EventScreen extends React.Component {
   }
 
   async componentDidMount() {
-    await this.getEvents();
-  }
+    //using the fetch controller
+    const { fetchLatestEvents } = this.props;
 
-  /**
-   * @function getEvents using the route controller from EventController.js to retrieve events
-   *
-   * @memberof EventScreen
-   */
-  getEvents = async () => {
-    const EventsData = await fetchAllEvents();
+    //fetching latest events
+    const EventsData = await fetchLatestEvents();
     this.setState({ EventsData });
-  };
+  }
 
   render() {
     const { EventsData } = this.state;

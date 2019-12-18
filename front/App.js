@@ -1,3 +1,6 @@
+import React from "react"
+import { fetchLatestEvents } from "./src/Controllers/EventController.js";
+
 //-----------------REACT NAVIGATION COMPONENTS----------------
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
@@ -12,7 +15,7 @@ import EventScreen from "./src/View/Screens/EventScreen/EventScreen.js";
 const App = createStackNavigator(
   {
     //All navigable screens
-    EventScreen
+    Home: () => <EventScreen fetchLatestEvents={fetchLatestEvents} />
   },
   //Navigation config
   {

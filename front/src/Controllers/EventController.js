@@ -5,7 +5,7 @@ import TodoList from "../Models/Event.js";
 /**
  *
  */
-export const fetchAllEvents = () => {
+export const fetchLatestEvents = () => {
   const todoListController = new TodoList();
   return todoListController.getAllEvents();
 };
