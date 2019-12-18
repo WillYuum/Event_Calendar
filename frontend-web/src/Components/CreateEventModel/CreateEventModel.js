@@ -15,11 +15,18 @@ class CreateEventModel extends React.Component {
     this.state = {};
   }
 
+  componentWillReceiveProps(prevProps, prevState) {
+    if (prevProps) {
+      console.log("hellooooo", prevProps);
+    }
+  }
+
   handleShowDateInput = async ({ date }) => {
-    console.log("h1", typeof date.startStr);
-    debugger
-    await console.log(await getSpecificDate(date.endStr))
-    if (getDaysRange(date.start, date.end) > 1) {
+    console.log("Willy", date);
+    //making 1 more understandable
+    const OneDay = 1;
+
+    if ((await getDaysRange(date.start, date.end)) > OneDay) {
       return (
         <Col>
           <Form.Row>
@@ -53,8 +60,8 @@ class CreateEventModel extends React.Component {
 
   render() {
     //property data recieved by LargeCalendar compoenent
-    const { showModal, CreateEventData } = this.props;
-    console.log(CreateEventData);
+    const { showModal, SelectedDate } = this.props;
+    console.log("here", SelectedDate);
     //callback functions
     const { handleCloseModal } = this.props;
     return (
@@ -91,7 +98,7 @@ class CreateEventModel extends React.Component {
                 as="textarea"
                 placeholder="Describe about your event, what does it make it special"
               />
-              <this.handleShowDateInput date={CreateEventData} />
+              <this.handleShowDateInput date={SelectedDate} />
             </Form.Row>
           </Container>
         </Modal.Body>

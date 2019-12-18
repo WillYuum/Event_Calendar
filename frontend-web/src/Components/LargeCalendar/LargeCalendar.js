@@ -28,12 +28,17 @@ class LargeCalendar extends React.Component {
       Events: [],
       isCreatingEvent: false,
       ToggleShowModal: false,
-      CreateEventData: ""
+      SelectedDate: ""
     };
   }
 
   async componentDidMount() {
     await this.getAllEvents();
+  }
+
+  componentWillUpdate(){
+    debugger;
+    console.log("here",this.state.SelectedDate)
   }
 
   // storing backend Url in readable variable
@@ -50,7 +55,10 @@ class LargeCalendar extends React.Component {
 
       //create a new struct for object since calendar takes a different obbject struct
       for (let i = 0; i < res.length; i++) {
+        //creating an instance of event object
         const Event = {};
+
+        //adding event info to Event object
         Event.id = res[i].EventId;
         Event.title = res[i].EventName;
         Event.Description = res[i].EventDescription;
@@ -87,11 +95,12 @@ class LargeCalendar extends React.Component {
 
   //selecting the range of date for creating event
   handleSelectedDates = info => {
+    console.log("test")
     //pop up the modal
     this.setState({ ToggleShowModal: true });
 
     //saving the select dates data in state to send it to the model
-    this.setState({ CreateEventData: info });
+    this.setState({ SelectedDate: 1 });
   };
 
   ToggleCreateMode = () => {
@@ -116,8 +125,10 @@ class LargeCalendar extends React.Component {
       Events,
       isCreatingEvent,
       ToggleShowModal,
-      CreateEventData
+      SelectedDate
     } = this.state;
+debugger
+    console.log("focus here", SelectedDate);
 
     return (
       <div id="largeCalendar" className="LargeCalendar-container">
@@ -152,22 +163,22 @@ class LargeCalendar extends React.Component {
           }}
           //giving the calendar the event data
           events={Events}
-
           //when user clicks on event this function runs
           eventClick={this.handleEventClick}
           selectable={isCreatingEvent ? true : false}
           select={this.handleSelectedDates}
           eventLimit={3}
         />
-
+        
         <CreateEventModal
           showModal={ToggleShowModal}
           handleCloseModal={this.handleCloseModal}
-          CreateEventData={CreateEventData}
+          SelectedDate={SelectedDate}
         />
       </div>
     );
   }
+  debugger;
 }
 
 export default LargeCalendar;
