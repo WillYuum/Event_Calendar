@@ -42,15 +42,23 @@ class LargeEventCardView extends React.Component {
     };
 
     //receiving props from controller
-    const { EventTitle, HostName, EventStartDate } = this.props;
+    const { EventTitle, HostName, EventStartDate, ImageSrc } = this.props;
+
+    //adding the bas64 image to be able to show the image in source
+    let ImageUrl = "data:image/png;base64," + ImageSrc + ";";
     return (
       <View style={CardContainer}>
         <View style={ImageContainer}>
-          <Image source={Image_Http_URL} style={EventImage} />
+          <Image
+            source={ImageSrc ? { uri: ImageUrl } : Image_Http_URL}
+            style={EventImage}
+          />
         </View>
         <View style={EventInfo}>
           <View style={dateContainer}>
+            {/*=Displaying the start Month (Dec)*/}
             <Text style={EventMonth}>{dateFormat(EventStartDate, "mmm")}</Text>
+            {/*=Displaying the start Day (05)*/}
             <Text style={EventDay}>{dateFormat(EventStartDate, "dd")}</Text>
           </View>
           <View style={detailsContainer}>

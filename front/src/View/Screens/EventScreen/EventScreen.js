@@ -53,11 +53,14 @@ class EventScreen extends React.Component {
           EventTitle={EventsData[0].EventName}
           HostName={EventsData[0].HostName}
           EventStartDate={EventsData[0].EventStartDate}
+          ImageSrc={EventsData[0].EventMainImage}
         />
       );
     } else {
       latestEvent = <Text>Loading...</Text>;
     }
+
+    
     return (
       <View style={ScreenContainer}>
         <View>

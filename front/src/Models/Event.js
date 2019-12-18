@@ -29,4 +29,8 @@ export default class Event extends EventRecord {
     const result = await request.json();
     return result;
   }
+
+  async getEventImages(){
+    
+  }
 }

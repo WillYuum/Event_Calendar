@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const MapEventsStyle = StyleSheet.create({
   container: {
-    marginTop: 130,
+    // marginTop: 0,
     marginBottom: 130,
     width: "95%",
     height: "100%",
