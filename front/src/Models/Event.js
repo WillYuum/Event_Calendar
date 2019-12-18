@@ -1,7 +1,9 @@
+import { BACKEND_URL } from "react-native-dotenv";
+
 /**
  *
- *  
- * @class EventRecord - Event object structure 
+ *
+ * @class EventRecord - Event object structure
  */
 class EventRecord {
   EventId = null;
@@ -23,8 +25,9 @@ export default class Event extends EventRecord {
    * @memberof Event
    */
   async getAllEvents() {
-    const request = await fetch("http://192.168.0.155:3001/getevents");
+    const request = await fetch(`${BACKEND_URL}/getevents`);
     const result = await request.json();
+    console.log("here",BACKEND_URL)
     return result;
   }
 }
