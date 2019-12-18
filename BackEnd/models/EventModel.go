@@ -14,6 +14,7 @@ type Event struct {
 	HostName         string    `json:"HostName"`
 	EventStartDate   time.Time `json:"EventStartDate"`
 	EventEndDate     time.Time `json: "EventEndDate"`
+	EventMainImage	 []byte    `json: "EventMainImage`
 }
 
 
@@ -28,7 +29,7 @@ func GetEvents() Events {
 	events := Events{}
 
 	//query all the rows from Event table
-	sqlStmt := `SELECT "Event"."EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate"
+	sqlStmt := `SELECT "Event"."EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate", (SELECT "Image" FROM public."EventImage" WHERE "Event"."EventId" = "EventImage"."EventId" limit 1)
 	FROM public."Event"`
 	rows, err := db.Query(sqlStmt)
 	if err != nil {
@@ -45,6 +46,7 @@ func GetEvents() Events {
 			&event.HostName,
 			&event.EventStartDate,
 			&event.EventEndDate,
+			&event.EventMainImage,
 		)
 		if err != nil {
 			log.Fatal(err)
@@ -62,7 +64,8 @@ func GetLatestEvents() Events{
 	//initialized var with array empty array of type Events
 	events := Events{}
 
-	sqlStmt := `SELECT * FROM public."Event" 
+	sqlStmt := `SELECT "Event"."EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate", (SELECT "Image" FROM public."EventImage" WHERE "Event"."EventId" = "EventImage"."EventId" limit 1) 
+	FROM public."Event" 
 	WHERE "EventStartDate" > CURRENT_TIMESTAMP
 	ORDER BY "EventStartDate" ASC`
 
@@ -81,6 +84,7 @@ func GetLatestEvents() Events{
 			&event.HostName,
 			&event.EventStartDate,
 			&event.EventEndDate,
+			&event.EventMainImage,
 		)
 		if err != nil {
 			log.Fatal(err)
@@ -95,7 +99,7 @@ func GetLatestEvents() Events{
 
 func GetEventById(EventId int)Event{
 	//query to get event depending on  event id
-	sqlStmt := `SELECT "EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate"
+	sqlStmt := `SELECT "EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate",(SELECT "Image" FROM public."EventImage" WHERE "Event"."EventId" = "EventImage"."EventId" limit 1) 
 	FROM public."Event" WHERE "EventId" = $1`
 
 	//retrieving data from database
@@ -105,11 +109,13 @@ func GetEventById(EventId int)Event{
 	event := Event{}
 	row.Scan(
 		&event.EventID,
-			&event.EventName,
-			&event.EventDescription,
-			&event.HostName,
-			&event.EventStartDate,
-			&event.EventEndDate,
+		&event.EventName,
+		&event.EventDescription,
+		&event.HostName,
+		&event.EventStartDate,
+		&event.EventEndDate,
+		&event.EventMainImage,
+
 	)
 
 	return event
