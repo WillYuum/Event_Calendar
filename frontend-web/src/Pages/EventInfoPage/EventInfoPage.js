@@ -59,7 +59,11 @@ class EventInfoPage extends React.Component {
       );
       const result = await req.json();
 
-      this.setState({ EventImage: result[0].Image });
+      if (result) {
+        this.setState({ EventImage: result[0].Image });
+      } else {
+        return;
+      }
     } catch (err) {
       throw new Error(`fetch event image failed with ${err}`);
     }
