@@ -10,7 +10,7 @@ import MapSmallCardEvent from "../../MapComponents/MapSmallCardEvents.js";
 import { EventScreenStyle } from "./EventScreenStyle.js";
 
 /**
- *
+ * @prop {array} EventData - array that will contain all the information in the events
  *
  * @class EventScreen
  * @extends {React.Component}
@@ -34,7 +34,6 @@ class EventScreen extends React.Component {
 
   render() {
     const { EventsData } = this.state;
-    console.log(EventsData);
 
     //Styling variables
     const {
@@ -60,7 +59,6 @@ class EventScreen extends React.Component {
       latestEvent = <Text>Loading...</Text>;
     }
 
-    
     return (
       <View style={ScreenContainer}>
         <View>

@@ -1,3 +1,9 @@
+To add the localhost port for the project add .env and add the port in the variable:
+`BACKEND_URL`
+
+
+
+
 in case of this error:
 
 ```
