@@ -1,6 +1,7 @@
 import React from 'react';
+import dateFormat from "dateformat";
 
-import { getDaysRange, getSpecificDate } from "../../utils/getDaysRange.js";
+import { getDaysRange } from "../../utils/getDaysRange.js";
 
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -12,12 +13,27 @@ class ShowDateInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-
+            date: "",
+            endDate: ""
         }
     }
 
-    HandleOneInput = () => {
-        const { date } = this.props
+    // async componentDidMount() {
+    //     await this.getSpecificdate()
+    // }
+
+    // getSpecificdate = async () => {
+    //     const { date } = this.state
+    //     await console.log("date", date)
+    //     let impreciseDate = await Date(date.endStr);
+    //     await impreciseDate.setDate(await impreciseDate.getDate() - 1);
+    //     console.log("impreciseDate", impreciseDate)
+    //     const x = await dateFormat(await impreciseDate, "yy-mm-dd")
+    //     await console.log("WTF", x)
+    //     this.setState({ endDate: x })
+    // }
+
+    HandleOneInput = ({ date }) => {
         return (
             <Col>
                 <Form.Row>
@@ -30,8 +46,7 @@ class ShowDateInput extends React.Component {
         )
     }
 
-    HandleTwoInput = () => {
-        const { date } = this.props
+    HandleTwoInput = ({ date }) => {
         return (
             <Col>
                 <Form.Row>
@@ -43,7 +58,7 @@ class ShowDateInput extends React.Component {
                         <Form.Label>End Date</Form.Label>
                         <Form.Control
                             type="date"
-                            defaultValue={date.endStr}
+                            value={this.state.endDate}
                         />
                     </Col>
                 </Form.Row>
@@ -51,12 +66,15 @@ class ShowDateInput extends React.Component {
         )
     }
 
-    render() {
-        // await console.log(await getSpecificDate(date.endStr))
 
+
+    render() {
         const { date } = this.props
+        //     console.log(date)
+        //    this.setState({date: date})
+        //    console.log("what",this.state.date)
         //  getDaysRange(date.start, date.end) ? "" : "" 
-        return getDaysRange(date.start, date.end) !== 1 ? this.HandleTwoInput() : this.HandleOneInput()
+        return getDaysRange(date.start, date.end) !== 1 ? <this.HandleTwoInput date={date} /> : <this.HandleOneInput date={date} />
 
 
 
