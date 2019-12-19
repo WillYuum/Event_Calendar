@@ -21,7 +21,7 @@ export const LatestEventStyle = StyleSheet.create({
 
   EventInfo: {
     width: "100%",
-    height: "40%",
+    height: "45%",
     flexDirection: "row",
     backgroundColor: "white"
   },

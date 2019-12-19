@@ -15,18 +15,18 @@ export const EventScreenStyle = StyleSheet.create({
   BackgroundIntro: {
     backgroundColor: "purple",
     width: "100%",
-    height: 250
+    height: 350
   },
 
   WelcomeText: {
     fontSize: 40,
     color: "white",
-    marginTop: 35,
+    marginTop: 65,
     textAlign: "center"
   },
 
   latestEventPos: {
-    marginTop: -35,
+    // marginTop: -15,
     width: "95%",
     height: 275,
     alignSelf: "center"
