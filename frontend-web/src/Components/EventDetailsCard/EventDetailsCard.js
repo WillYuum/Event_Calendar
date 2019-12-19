@@ -33,8 +33,9 @@ class EventDetailsCard extends React.Component {
   Back_UrlPort = process.env.REACT_APP_PORT;
 
   async UNSAFE_componentWillReceiveProps(prevProps, prevState) {
+    console.log(prevProps, prevState);
     if (prevProps.EventData.length !== 0) {
-      await this.setState({ EventData: prevProps.EventData[0] });
+      await this.setState({ EventData: prevProps.EventData });
       await this.getEventImageById(this.state.EventData.id);
       return;
     } else {

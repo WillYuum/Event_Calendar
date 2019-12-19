@@ -45,7 +45,6 @@ class LandingPage extends React.Component {
             <EventDetailsCard EventData={EventData} />
           </div>
         </div>
-        
       </div>
     );
   }
