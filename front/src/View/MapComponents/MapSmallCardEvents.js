@@ -9,7 +9,7 @@ import { MapEventsStyle } from "./MapSmallCardEventsStyle.js";
 /**
  *
  * @prop {String} Title - event title
- * @prop {String} Host - Host's name 
+ * @prop {String} Host - Host's name
  * @prop {Date} EventStartDate - Date/Time of the beginning of the event
  * @prop {Base64} ImageSrc - the base 64 that will be added to source image
  *
@@ -22,10 +22,13 @@ class MapEvents extends React.Component {
     this.state = {};
   }
   render() {
+    //props recieved by EventScreen Component
     const { EventsData } = this.props;
-    const { container } = MapEventsStyle;
+    
+    //Styling variables
+    const { MapEventsContainer } = MapEventsStyle;
     return (
-      <View style={container}>
+      <View style={MapEventsContainer}>
         {EventsData.slice(1).map((event, index) => {
           return (
             <SmallEventCard
