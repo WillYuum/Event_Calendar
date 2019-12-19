@@ -1,14 +1,20 @@
 import dateFormat from "dateformat";
 
-export const getDaysRange = async (startDate, endDate) => {
+/**
+ * @function getDaysRange - get the days in range of start date and end date
+ * @param {Date} startDate - Event start date timestamp
+ * @param {Date} endDate - Event end Date timestamp
+ * @return {int} - number of days in range of start date and end date
+ */
+export const getDaysRange = (startDate, endDate) => {
   startDate = new Date(startDate);
   endDate = new Date(endDate);
 
   const oneDay = 24 * 60 * 60 * 1000;
 
   const daysRange = Math.round(Math.abs((startDate - endDate) / oneDay));
-  console.log(daysRange)
-  return await daysRange;
+  console.log("day range", daysRange);
+  return daysRange;
 };
 
 /**
@@ -22,7 +28,7 @@ export const getSpecificDate = async date => {
   // let impreciseDate = await new Date(date);
   // await console.log("moza", impreciseDate)
   // await impreciseDate.setDate(impreciseDate.getDate() - 1);
-  return date
+  return date;
   // const x = await dateFormat(impreciseDate, "yy-mm-dd")
   // await console.log("WTF", x)
   // return await x
