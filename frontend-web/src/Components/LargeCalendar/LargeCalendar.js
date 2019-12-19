@@ -36,10 +36,7 @@ class LargeCalendar extends React.Component {
     await this.getAllEvents();
   }
 
-  componentWillUpdate(){
-    debugger;
-    console.log("here",this.state.SelectedDate)
-  }
+
 
   // storing backend Url in readable variable
   Back_Url = process.env.REACT_APP_PORT;
@@ -100,7 +97,7 @@ class LargeCalendar extends React.Component {
     this.setState({ ToggleShowModal: true });
 
     //saving the select dates data in state to send it to the model
-    this.setState({ SelectedDate: 1 });
+    this.setState({ SelectedDate: info });
   };
 
   ToggleCreateMode = () => {
@@ -127,7 +124,6 @@ class LargeCalendar extends React.Component {
       ToggleShowModal,
       SelectedDate
     } = this.state;
-debugger
     console.log("focus here", SelectedDate);
 
     return (
@@ -178,7 +174,6 @@ debugger
       </div>
     );
   }
-  debugger;
 }
 
 export default LargeCalendar;

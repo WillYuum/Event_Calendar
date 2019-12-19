@@ -1,11 +1,12 @@
 import React from "react";
-import { getDaysRange, getSpecificDate } from "../../utils/getDaysRange.js";
 
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
 import { Container, Row, Col, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
+
+import ShowDateInput from "./ShowDateInput.js"
 
 import "./CreateEventModel.scss";
 
@@ -14,49 +15,6 @@ class CreateEventModel extends React.Component {
     super(props);
     this.state = {};
   }
-
-  componentWillReceiveProps(prevProps, prevState) {
-    if (prevProps) {
-      console.log("hellooooo", prevProps);
-    }
-  }
-
-  handleShowDateInput = async ({ date }) => {
-    console.log("Willy", date);
-    //making 1 more understandable
-    const OneDay = 1;
-
-    if ((await getDaysRange(date.start, date.end)) > OneDay) {
-      return (
-        <Col>
-          <Form.Row>
-            <Col>
-              <Form.Label>Start Date</Form.Label>
-              <Form.Control type="date" defaultValue={date.startStr} />
-            </Col>
-            <Col>
-              <Form.Label>End Date</Form.Label>
-              <Form.Control
-                type="date"
-                defaultValue={getSpecificDate(date.endStr)}
-              />
-            </Col>
-          </Form.Row>
-        </Col>
-      );
-    } else {
-      return (
-        <Col>
-          <Form.Row>
-            <Col>
-              <Form.Label>Event Date</Form.Label>
-              <Form.Control type="date" defaultValue={date.startStr} />
-            </Col>
-          </Form.Row>
-        </Col>
-      );
-    }
-  };
 
   render() {
     //property data recieved by LargeCalendar compoenent
@@ -98,7 +56,7 @@ class CreateEventModel extends React.Component {
                 as="textarea"
                 placeholder="Describe about your event, what does it make it special"
               />
-              <this.handleShowDateInput date={SelectedDate} />
+              <ShowDateInput date={SelectedDate} />
             </Form.Row>
           </Container>
         </Modal.Body>
