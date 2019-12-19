@@ -24,20 +24,22 @@ class MapEvents extends React.Component {
   render() {
     //props recieved by EventScreen Component
     const { EventsData } = this.props;
-    
+
     //Styling variables
     const { MapEventsContainer } = MapEventsStyle;
     return (
       <View style={MapEventsContainer}>
         {EventsData.slice(1).map((event, index) => {
           return (
-            <SmallEventCard
-              key={index}
-              Title={event.EventName}
-              Host={event.HostName}
-              EventStartDate={event.EventStartDate}
-              ImageSrc={event.EventMainImage}
-            />
+      
+              <SmallEventCard
+                key={index}
+                Title={event.EventName}
+                Host={event.HostName}
+                EventStartDate={event.EventStartDate}
+                ImageSrc={event.EventMainImage}
+              />
+     
           );
         })}
       </View>

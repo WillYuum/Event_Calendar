@@ -32,7 +32,8 @@ class LargeEventCardView extends React.Component {
       EventMonth,
       EventDay,
       EventTitleStyle,
-      EventHost
+      EventHost,
+      HostNameText
     } = LatestEventStyle;
 
     //static image
@@ -63,7 +64,9 @@ class LargeEventCardView extends React.Component {
           </View>
           <View style={detailsContainer}>
             <Text style={EventTitleStyle}>{EventTitle}</Text>
-            <Text style={EventHost}>by {HostName}</Text>
+            <Text style={EventHost}>
+              by <Text style={HostNameText}>{HostName}</Text>
+            </Text>
           </View>
         </View>
       </View>

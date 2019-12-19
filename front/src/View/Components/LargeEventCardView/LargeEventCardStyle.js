@@ -11,7 +11,8 @@ export const LatestEventStyle = StyleSheet.create({
 
   ImageContainer: {
     width: "100%",
-    height: "60%"
+    height: "60%",
+    resizeMode: "stretch"
   },
 
   EventImage: {
@@ -53,11 +54,16 @@ export const LatestEventStyle = StyleSheet.create({
   },
 
   EventTitleStyle: {
-    fontSize: 25
+    fontSize: 25,
+    color: "#4D648D"
   },
 
   EventHost: {
     color: "gray",
     fontSize: 20
+  },
+
+  HostNameText: {
+    color: "#4D648D"
   }
 });

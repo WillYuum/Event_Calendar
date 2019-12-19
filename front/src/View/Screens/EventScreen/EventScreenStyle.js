@@ -13,7 +13,7 @@ export const EventScreenStyle = StyleSheet.create({
   },
 
   BackgroundIntro: {
-    backgroundColor: "purple",
+    backgroundColor: "#4D648D",
     width: "100%",
     height: 350
   },
@@ -21,12 +21,12 @@ export const EventScreenStyle = StyleSheet.create({
   WelcomeText: {
     fontSize: 40,
     color: "white",
-    marginTop: 65,
+    marginTop: 90,
     textAlign: "center"
   },
 
   latestEventPos: {
-    // marginTop: -15,
+    marginTop: -75,
     width: "95%",
     height: 275,
     alignSelf: "center"

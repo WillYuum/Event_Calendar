@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import ImageResizeMode from "react-native/Libraries/Image/ImageResizeMode";
 
 export const SmallEventCardStyle = StyleSheet.create({
   containerCard: {
     width: "100%",
     height: 125,
     flexDirection: "row",
-    marginTop: 40
+    marginTop: 40,
+    alignSelf: "center"
   },
 
   ImageContainer: {
@@ -22,13 +22,14 @@ export const SmallEventCardStyle = StyleSheet.create({
 
   EventInfo: {
     backgroundColor: "white",
-    width: "70%",
+    width: "60%",
     height: "100%",
     padding: 10
   },
 
   EventTitle: {
-    fontSize: 20
+    fontSize: 20,
+    color: "#4D648D"
   },
 
   EventHost: {
@@ -39,6 +40,12 @@ export const SmallEventCardStyle = StyleSheet.create({
   EventDate: {
     marginTop: 20,
     fontSize: 18,
-    color: "gray"
+    color: "gray",
+    color: "#4D648D"
+
+  },
+
+  HostNameText: {
+    color: "#4D648D"
   }
 });

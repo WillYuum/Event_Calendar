@@ -29,7 +29,8 @@ class SmallEventCardView extends React.Component {
       EventInfo,
       EventTitle,
       EventHost,
-      EventDate
+      EventDate,
+      HostNameText
     } = SmallEventCardStyle;
 
     //props recieved from MapSmallCardEvent.js component
@@ -44,20 +45,26 @@ class SmallEventCardView extends React.Component {
     //adding the bas64 image to be able to show the image in source
     let ImageUrl = "data:image/png;base64," + ImageSrc + ";";
     return (
-      <View style={containerCard}>
-        <View style={ImageContainer}>
-          <Image
-            source={ImageSrc ? { uri: ImageUrl } : Image_Http_URL}
-            style={EventImage}
-          />
-        </View>
-        <View style={EventInfo}>
-          <Text style={EventTitle}>{Title}</Text>
-          <Text style={EventHost}>by {Host}</Text>
-          <Text style={EventDate}>
-            {/*=Displaying the start date (Fri, Dec 20 - 02:00 AM)*/}
-            {dateformat(EventStartDate, "ddd, mmm dd - HH:MM TT")}
-          </Text>
+      <View>
+        <View style={containerCard}>
+          <View style={ImageContainer}>
+            <Image
+              source={ImageSrc ? { uri: ImageUrl } : Image_Http_URL}
+              style={EventImage}
+            />
+          </View>
+          <View style={EventInfo}>
+            <Text numberOfLines={1} style={EventTitle}>
+              {Title}
+            </Text>
+            <Text style={EventHost}>
+              by <Text style={HostNameText}>{Host}</Text>
+            </Text>
+            <Text style={EventDate}>
+              {/*Displaying the start date (Fri, Dec 20 - 02:00 AM)*/}
+              {dateformat(EventStartDate, "ddd, mmm dd - HH:MM TT")}
+            </Text>
+          </View>
         </View>
       </View>
     );
