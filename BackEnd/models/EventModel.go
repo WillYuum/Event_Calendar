@@ -66,7 +66,7 @@ func GetLatestEvents() Events{
 
 	sqlStmt := `SELECT "Event"."EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate", (SELECT "Image" FROM public."EventImage" WHERE "Event"."EventId" = "EventImage"."EventId" limit 1) 
 	FROM public."Event" 
-	WHERE "EventStartDate" > CURRENT_TIMESTAMP
+	WHERE "EventStartDate" >= current_date
 	ORDER BY "EventStartDate" ASC`
 
 	rows, err := db.Query(sqlStmt)

@@ -50,7 +50,7 @@ class NavBar extends React.Component {
             </ul>
           </div>
         </div>
-        <div class="offcanvas-overlay"></div>
+        <div className="offcanvas-overlay"></div>
       </div>
     );
   }

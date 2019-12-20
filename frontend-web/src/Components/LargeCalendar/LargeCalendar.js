@@ -1,5 +1,6 @@
 import React from "react";
 import shuffle from "shuffle-array";
+
 //---------------FullCalendar modules----------------
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
@@ -7,8 +8,12 @@ import interactionPlugin from "@fullcalendar/interaction";
 //---------------FullCalendar modules----------------
 
 //---------------IMPORTED COMPONENT----------------
-import CreateEventModal from "../../Components/CreateEventModel/CreateEventModel.js";
+import ChainedCreateModal from "../../Components/ChainedCreateModal/ChainedCreateModal.js";
 //---------------IMPORTED COMPONENT----------------
+
+//--------------------IMPORTING CREATE EVENT MODALS--------------------
+import EventMainInfo from "../CreateEventModals/EventMainInfo/EventMainInfo.js";
+//--------------------IMPORTING CREATE EVENT MODALS---------------------
 
 //--------FullCalendar css-----------
 import "@fullcalendar/core/main.css";
@@ -28,10 +33,12 @@ class LargeCalendar extends React.Component {
     this.state = {
       Events: [],
       isCreatingEvent: false,
-      ToggleShowModal: false,
       SelectedDate: "",
       latestevents: []
     };
+
+    //referencing child component ChainedCreate Model to this component
+    this.ChainedModalElement = React.createRef();
   }
 
   async componentDidMount() {
@@ -57,13 +64,13 @@ class LargeCalendar extends React.Component {
       const response = await request.json();
 
       //picking first 4 and randomizing them
-      const ClosestEvents = response.slice(4);
+      const ClosestEvents = await response.slice(0, 2);
       const shuffledEvents = shuffle(ClosestEvents);
 
       //selecting on of the 4 randomized events
       const SelectedEvent =
         shuffledEvents[Math.floor(Math.random() * shuffledEvents.length)];
-
+      console.log(ClosestEvents);
       //creating an instance of event object
       const Event = {};
 
@@ -138,6 +145,7 @@ class LargeCalendar extends React.Component {
 
     //saving the select dates data in state to send it to the model
     this.setState({ SelectedDate: info });
+    this.ChainedModalElement.current.ToggleModel();
   };
 
   ToggleCreateMode = () => {
@@ -153,19 +161,13 @@ class LargeCalendar extends React.Component {
     }
   }
 
-  handleCloseModal = () => {
-    this.setState({ ToggleShowModal: false });
-  };
-
   render() {
-    const {
-      Events,
-      isCreatingEvent,
-      ToggleShowModal,
-      SelectedDate
-    } = this.state;
+    const { Events, isCreatingEvent, SelectedDate } = this.state;
     console.log("focus here", SelectedDate);
 
+    let ArrayOfCreateModals = [
+      { Component: EventMainInfo, props: SelectedDate }
+    ];
     return (
       <div id="largeCalendar" className="LargeCalendar-container">
         <FullCalendar
@@ -206,10 +208,10 @@ class LargeCalendar extends React.Component {
           eventLimit={3}
         />
 
-        <CreateEventModal
-          showModal={ToggleShowModal}
-          handleCloseModal={this.handleCloseModal}
-          SelectedDate={SelectedDate}
+        <ChainedCreateModal
+          ref={this.ChainedModalElement}
+          modalList={ArrayOfCreateModals}
+          ToggleCreateMode={this.ToggleCreateMode}
         />
       </div>
     );

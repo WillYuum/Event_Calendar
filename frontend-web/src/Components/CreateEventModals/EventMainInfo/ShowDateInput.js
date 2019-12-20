@@ -1,7 +1,7 @@
 import React from "react";
 import dateFormat from "dateformat";
 
-import { getDaysRange } from "../../utils/getDaysRange.js";
+import { getDaysRange } from "../../../utils/getDaysRange.js";
 
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
 import { Col } from "react-bootstrap";

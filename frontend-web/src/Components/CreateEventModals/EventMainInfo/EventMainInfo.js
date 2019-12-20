@@ -1,16 +1,23 @@
 import React from "react";
 
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
 
-import ShowDateInput from "./ShowDateInput.js"
+//-------------------IMPORTED COMPONENTS---------------------
+import ShowDateInput from "./ShowDateInput.js";
+//-------------------IMPORTED COMPONENTS---------------------
 
-import "./CreateEventModel.scss";
-
-class CreateEventModel extends React.Component {
+/**
+ * @prop {boolean} showModal - recieving  this prop will make the current modal show to user
+ * @prop {Date} SelectedDate - date range recieved from LargeCalendar
+ *
+ * @class EventMainInfo
+ * @extends {React.Component}
+ */
+class EventMainInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -19,7 +26,7 @@ class CreateEventModel extends React.Component {
   render() {
     //property data recieved by LargeCalendar compoenent
     const { showModal, SelectedDate } = this.props;
-    console.log("here", SelectedDate);
+    console.log("here", showModal);
     //callback functions
     const { handleCloseModal } = this.props;
     return (
@@ -68,4 +75,4 @@ class CreateEventModel extends React.Component {
   }
 }
 
-export default CreateEventModel;
+export default EventMainInfo;
