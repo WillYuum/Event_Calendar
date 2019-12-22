@@ -23,29 +23,27 @@ class ChainedCreateModal extends React.Component {
 
   ToggleModel = () => {
     const showModal = !this.state.showModal;
-    this.setState({ showModal: true });
+    this.setState({ showModal });
   };
 
   render() {
     //recieving props LargeCalendar.js Component
-    const { modalList } = this.props;
+    const { modalList, SelectedDate } = this.props;
     const { currIndex, showModal } = this.state;
 
     console.log(modalList[0])
 
     const CurrentModalComponent = modalList[currIndex];
-    // console.log("checking here", CurrentModalComponent);
-    console.log(this.state.showModal);
+
     return showModal ? (
       <CurrentModalComponent
         onClickNext={this.handleClickNext}
-        showModal={showModal}
+        showModal={this.ToggleModel}
+        SelectedDate={SelectedDate}
       />
-    ) : (
-      <h1>
-        Hello World
-      </h1>
-    );
+    ) :
+      ""
+
   }
 
   handleClickNext = () => {

@@ -1,9 +1,7 @@
 import React from "react";
 
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
-import { Container, Button } from "react-bootstrap";
-import Modal from "react-bootstrap/Modal";
-import Form from "react-bootstrap/Form";
+import { Container, Button, Modal, Form } from "react-bootstrap";
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
 
 //-------------------IMPORTED COMPONENTS---------------------
@@ -25,14 +23,13 @@ class EventMainInfo extends React.Component {
 
   render() {
     //property data recieved by LargeCalendar compoenent
-    const { showModal, SelectedDate } = this.props;
-    console.log("here", showModal);
+    const { showModal, SelectedDate, onClickNext } = this.props;
+    console.log("here", this.props);
     //callback functions
-    const { handleCloseModal } = this.props;
     return (
       <Modal
         show={showModal}
-        onHide={handleCloseModal}
+        onHide={showModal}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -68,7 +65,7 @@ class EventMainInfo extends React.Component {
           </Container>
         </Modal.Body>
         <Modal.Footer>
-          <Button>Next</Button>
+          <Button onClick={() => onClickNext()}>Next</Button>
         </Modal.Footer>
       </Modal>
     );

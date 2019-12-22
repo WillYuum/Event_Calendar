@@ -13,6 +13,7 @@ import ChainedCreateModal from "../../Components/ChainedCreateModal/ChainedCreat
 
 //--------------------IMPORTING CREATE EVENT MODALS--------------------
 import EventMainInfo from "../CreateEventModals/EventMainInfo/EventMainInfo.js";
+import CreateSessionModal from "../CreateEventModals/CreateSessionModel/CreateSessionModel.js"
 //--------------------IMPORTING CREATE EVENT MODALS---------------------
 
 //--------FullCalendar css-----------
@@ -165,9 +166,7 @@ class LargeCalendar extends React.Component {
     const { Events, isCreatingEvent, SelectedDate } = this.state;
     console.log("focus here", SelectedDate);
 
-    let ArrayOfCreateModals = [
-      { Component: EventMainInfo, props: SelectedDate }
-    ];
+    let ArrayOfCreateModals = [EventMainInfo, CreateSessionModal];
     return (
       <div id="largeCalendar" className="LargeCalendar-container">
         <FullCalendar
@@ -211,7 +210,7 @@ class LargeCalendar extends React.Component {
         <ChainedCreateModal
           ref={this.ChainedModalElement}
           modalList={ArrayOfCreateModals}
-          ToggleCreateMode={this.ToggleCreateMode}
+          SelectedDate={SelectedDate}
         />
       </div>
     );

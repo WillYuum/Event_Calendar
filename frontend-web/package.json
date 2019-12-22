@@ -22,6 +22,7 @@
     "react-big-calendar": "0.23.0",
     "react-bootstrap": "^1.0.0-beta.16",
     "react-calendar": "2.19.2",
+    "react-datetime-picker": "^2.8.0",
     "react-dom": "^16.12.0",
     "react-google-maps": "^9.4.5",
     "react-leaflet": "^2.6.0",
@@ -29,7 +30,10 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scripts": "^3.3.0",
+    "react-time-picker": "^3.8.0",
+    "react-widgets": "^4.4.11",
     "shuffle-array": "^1.0.1",
+    "time-input": "^1.6.1",
     "webpack": "^4.41.2"
   },
   "scripts": {
