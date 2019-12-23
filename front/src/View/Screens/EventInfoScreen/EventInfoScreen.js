@@ -2,8 +2,19 @@ import React from "react";
 import dateFormat from "dateformat";
 
 //------------------IMPORTED REACT NATIVE COMPONENT------------------
-import { View, Image, Text, ScrollView } from "react-native";
+import {
+  View,
+  Image,
+  Text,
+  ScrollView,
+  StyleSheet,
+  Dimensions
+} from "react-native";
 //------------------IMPORTED REACT NATIVE COMPONENT------------------
+
+//------------------REACT NATIVE MAP-----------------
+import MapView from "react-native-maps";
+//------------------REACT NATIVE MAP-----------------
 
 //importing stylesheet
 import { EventInfoScreenStyle } from "./EventInfoScreenStyle.js";
@@ -50,7 +61,9 @@ class EventInfoScreen extends React.Component {
       EventTitle,
       HostName,
       EventDescription,
-      HostedByText
+      HostedByText,
+      MapContainer,
+      MapSize
     } = EventInfoScreenStyle;
 
     const defaultImage = {
@@ -60,11 +73,9 @@ class EventInfoScreen extends React.Component {
 
     let ImageUrl = "data:image/png;base64," + EventData.EventMainImage + ";";
     return (
-      <View>
-        <View style={EventInfoContainer}>
-          <ScrollView
-            contentContainerStyle={{ flexDirection: "column", height: "100%" }}
-          >
+      <View style={EventInfoContainer}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={{ flex: 1, flexDirection: "column" }}>
             <Image
               style={ImageContainer}
               source={ImageUrl ? { uri: ImageUrl } : defaultImage}
@@ -85,9 +96,12 @@ class EventInfoScreen extends React.Component {
                 {dateFormat(EventData.EventEndDate, "ddd, mmm dd - HH:MM TT")}
               </Text>
               <Text style={EventDescription}>{EventData.EventDescription}</Text>
+              {/* <View style={MapContainer}>
+                <MapView style={MapSize} />
+              </View> */}
             </View>
-          </ScrollView>
-        </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }

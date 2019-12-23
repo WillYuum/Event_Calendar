@@ -5,12 +5,12 @@ var height = Dimensions.get("window").height; //full height
 
 export const EventInfoScreenStyle = StyleSheet.create({
   EventInfoContainer: {
-    width: width,
-    height: height
+    width: "100%",
+    height: "100%"
   },
   ImageContainer: {
     width: "100%",
-    height: "40%",
+    height: 250,
     resizeMode: "stretch"
   },
   InfoContainer: {
@@ -27,10 +27,14 @@ export const EventInfoScreenStyle = StyleSheet.create({
   },
   HostName: {
     fontWeight: "bold",
-    fontSize:17
+    fontSize: 17
   },
   EventDescription: {
     fontSize: 20,
     marginTop: 35
-  }
+  },
+
+  MapContainer: { width: "100%" },
+
+  MapSize: { width: "100%", height: 150 }
 });

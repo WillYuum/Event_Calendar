@@ -43,7 +43,6 @@ class SmallEventCardView extends React.Component {
       ImageSrc,
       ...props
     } = this.props;
-    console.log("event id", EventId);
     //static image
     let Image_Http_URL = {
       uri:

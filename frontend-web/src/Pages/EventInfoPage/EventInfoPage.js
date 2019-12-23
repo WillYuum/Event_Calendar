@@ -71,7 +71,6 @@ class EventInfoPage extends React.Component {
 
   render() {
     const { EventData, EventImage } = this.state;
-    console.log(EventData);
     return (
       <div className="EventInfoPage-container">
         <div className="EventInfoPage-header">

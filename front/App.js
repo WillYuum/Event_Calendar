@@ -17,7 +17,7 @@ import EventInfoScreen from "./src/View/Screens/EventInfoScreen/EventInfoScreen.
 //---------------------IMPORTED COMPONENTS------------------
 
 //Icons styles/designs
-import Icon from "react-native-vector-icons/Ionicons";
+import { Ionicons } from '@expo/vector-icons/';
 
 //creating navigation
 const MainTabs = createMaterialBottomTabNavigator(
@@ -26,6 +26,11 @@ const MainTabs = createMaterialBottomTabNavigator(
     Home: {
       screen: props => {
         return <EventScreen fetchLatestEvents={fetchLatestEvents} {...props} />;
+      },
+      navigationOptions: {
+        tabBarIcon: ({ focused }) => (
+          <Ionicons name="home-outline" size={32} color="black" />
+        )
       }
     },
     Settings: {
@@ -39,7 +44,7 @@ const MainTabs = createMaterialBottomTabNavigator(
     initialRouteName: "Home",
     activeColor: "#f0edf6",
     inactiveColor: "#3e2465",
-    barStyle: { backgroundColor: "#694fad" }
+    barStyle: { backgroundColor: "white" }
   }
 );
 
@@ -63,7 +68,10 @@ const App = createStackNavigator(
     }
   },
   {
-    initialRouteName: "App"
+    initialRouteName: "App",
+    activeColor: "#f0edf6",
+    inactiveColor: "#3e2465",
+    barStyle: { backgroundColor: "#694fad" }
   }
 );
 
