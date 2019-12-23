@@ -29,9 +29,9 @@ class SessionCard extends React.Component {
         //recieving function props from CreateSessionModal.js component
         const {HandleDeleteSession} = this.props
         return (
-            <Card className="SessionCard">
-                <Card.Header as="h5">{SessionTitle}</Card.Header>
+            <Card className="SessionCard mb-3">
                 <Card.Body className="h-25">
+                    <Card.Title>{SessionTitle}</Card.Title>
                     <Col>
                         <Row className="descriptionContainer">
                             <Card.Text className="SessionDescription" as="p" p="100">{SessionDescription}</Card.Text>

@@ -8,6 +8,9 @@ import { Container, Button, Modal, Form } from "react-bootstrap";
 import ShowDateInput from "./ShowDateInput.js";
 //-------------------IMPORTED COMPONENTS---------------------
 
+
+import "./EventMainInfo.scss"
+
 /**
  * @prop {boolean} showModal - recieving  this prop will make the current modal show to user
  * @prop {Date} SelectedDate - date range recieved from LargeCalendar
@@ -28,6 +31,7 @@ class EventMainInfo extends React.Component {
     //callback functions
     return (
       <Modal
+        className="EventMainInfo-modal"
         show={showModal}
         onHide={showModal}
         size="lg"

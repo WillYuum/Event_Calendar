@@ -1,5 +1,11 @@
-.MapSessions-container{
+.CreateSessionModal-container {
+    .btn-primary{
+        background-color: #4d648d;
+    }
+
+  .MapSessions-container {
     max-height: 350px;
     overflow-y: auto;
     scrollbar-width: thin;
+  }
 }

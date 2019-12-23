@@ -153,15 +153,7 @@ class LargeCalendar extends React.Component {
     const CreateMode = !this.state.isCreatingEvent;
     this.setState({ isCreatingEvent: CreateMode });
   };
-
-  handleDisplayButtons() {
-    if (this.state.isCreatingEvent) {
-      return "CreateEvent Cancel";
-    } else {
-      return "NewEvent";
-    }
-  }
-
+  
   render() {
     const { Events, isCreatingEvent, SelectedDate } = this.state;
     console.log("focus here", SelectedDate);
@@ -178,10 +170,6 @@ class LargeCalendar extends React.Component {
             NewEvent: {
               text: "New Event",
               click: this.ToggleCreateMode
-            },
-            CreateEvent: {
-              text: "Create Event",
-              click: this.handleCreateEvent
             },
             Cancel: {
               text: "Cancel",

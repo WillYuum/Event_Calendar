@@ -43,8 +43,12 @@ class TabSection extends React.Component {
       //getting the sessions
       const result = await req.json();
       //saving the sessions to SessionsData state
-      this.setState({ SessionsData: result });
-      console.log(this.state.SessionsData);
+
+      if (result) {
+        this.setState({ SessionsData: result });
+      } else {
+        return;
+      }
     } catch (err) {
       throw new Error(`fetching sessions failed with ${err}`);
     }

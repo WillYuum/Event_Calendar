@@ -46,6 +46,10 @@ class NavBar extends React.Component {
             <ul>
               <li>
                 <Link to="/">Home</Link>
+                <Link to="/">Attending Events</Link>
+                <Link to="/">Settings</Link>
+                <Link to="/">LogOut</Link>
+                <Link to="/404">404 Page :)</Link>
               </li>
             </ul>
           </div>
