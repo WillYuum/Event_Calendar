@@ -1,13 +1,20 @@
 import React from "react";
-import { Text, View, ScrollView } from "react-native";
 
 //-------------------IMPORTED COMPONENTS--------------------
 import LatestEventCard from "../../Components/LargeEventCardView/LargeEventCardView.js";
 import MapSmallCardEvent from "../../MapComponents/MapSmallCardEvents.js";
 //-------------------IMPORTED COMPONENTS--------------------
 
+
+//-------------------IMPORTED REACT NATIVE COMPONENTS---------------
+import { Text, View, ScrollView, Button } from "react-native";
+import { TouchableNativeFeedback, TouchableHighlight } from "react-native"
+//-------------------IMPORTED REACT NATIVE COMPONENTS---------------
+
+
 //importing stylesheet file
 import { EventScreenStyle } from "./EventScreenStyle.js";
+import { LatestEventStyle } from "../../Components/LargeEventCardView/LargeEventCardStyle.js";
 
 /**
  * @prop {array} EventData - array that will contain all the information in the events
@@ -59,6 +66,8 @@ class EventScreen extends React.Component {
       latestEvent = <Text>Loading...</Text>;
     }
 
+    const { ...props } = this.props
+    console.log(props)
     return (
       <View style={ScreenContainer}>
         <View>
@@ -70,9 +79,9 @@ class EventScreen extends React.Component {
             {/*------------------INTRO SECTION-----------------------*/}
 
             {/*---------------LATEST EVENT CARD-----------------------*/}
-            <View>
-              <View style={latestEventPos}>{latestEvent}</View>
-            </View>
+            <TouchableNativeFeedback  onPress={() =>this.props.navigation.push("Event")} underlayColor='#f1c40f'  >
+              <View  style={latestEventPos}>{latestEvent}</View>
+            </TouchableNativeFeedback>
             {/*---------------LATEST EVENT CARD-----------------------*/}
 
             {/*-------------------Display all upcoming events--------------------*/}

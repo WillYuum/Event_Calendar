@@ -3,6 +3,11 @@ import { View, Image, Text } from "react-native";
 
 import dateFormat from "dateformat";
 
+//-------------------IMPORTED REACT NATIVE COMPONENTS---------------
+import {TouchableNativeFeedback } from "react-native"
+//-------------------IMPORTED REACT NATIVE COMPONENTS---------------
+
+
 //import stylesheet file
 import { LatestEventStyle } from "./LargeEventCardStyle.js";
 
@@ -48,7 +53,7 @@ class LargeEventCardView extends React.Component {
     //adding the bas64 image to be able to show the image in source
     let ImageUrl = "data:image/png;base64," + ImageSrc + ";";
     return (
-      <View style={CardContainer}>
+      <View  style={CardContainer}>
         <View style={ImageContainer}>
           <Image
             source={ImageSrc ? { uri: ImageUrl } : Image_Http_URL}

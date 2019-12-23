@@ -27,7 +27,7 @@ export default class Event extends EventRecord {
   async getAllEvents() {
     const request = await fetch(`${BACKEND_URL}/api/latestevents`);
     const result = await request.json();
-    return result;
+    return await result;
   }
 
   async getEventImages(){
