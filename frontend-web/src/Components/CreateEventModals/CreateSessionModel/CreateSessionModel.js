@@ -8,11 +8,11 @@ import SessionCard from "./SessionCard.js"
 
 
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
-import { Container, Button, Modal, Form, Col, Row, Input } from "react-bootstrap";
+import { Button, Modal, Form, Col, Row } from "react-bootstrap";
 //----------------IMPORTED BOOTSTRAP COMPONENTS-----------------
 
 import "./dateTimePicker.scss";
-
+import "./CreateSessionModel.scss"
 
 /**
  * @prop {boolean} showModal
@@ -69,16 +69,23 @@ class CreateSessionModel extends React.Component {
             let SessionInfo = { ...prevState.SessionInfo }
             let Key = dateTime.name
             let Value = DateFormat(dateTime.e._d, "ddd mmm dd yyyy HH:MM ss")
-            console.log(Key, Value)
             SessionInfo[Key] = Value
             return { SessionInfo }
         })
     }
 
-    HandleAddSession = () => {
 
+    /**
+     * @function HandleAddSession - adding the session to Sessions array state
+     *
+     * @memberof CreateSessionModel
+     */
+    HandleAddSession = () => {
+        //creating a copy of old state and setting the new values in the state
         let OldSessions = [...this.state.Sessions, this.state.SessionInfo]
         this.setState({ Sessions: OldSessions })
+
+        //emptying the inputs
         this.setState({
             SessionInfo: {
                 SessionTitle: "",
@@ -89,16 +96,33 @@ class CreateSessionModel extends React.Component {
         })
     }
 
+    /**
+     * @function HandleDisabledButton - switching the button off if inputs are empty
+     * @returns {Boolean} 
+     * @memberof CreateSessionModel
+     */
     HandleDisabledButton = () => {
         const { SessionInfo } = this.state
-        let checkIfInputExists = SessionInfo.SessionTitle !== "" && SessionInfo.SessionDescription !== ""
-        console.log(checkIfInputExists)
+        let checkIfInputExists = SessionInfo.SessionTitle !== "" && SessionInfo.SessionStart !== "" && SessionInfo.SessionEnd !== ""
         if (checkIfInputExists) {
             return false
         } else {
             return true
 
         }
+    }
+
+
+    HandleDeleteSession = (index) => {
+        const { Sessions } = this.state
+        
+        //removing session in array
+        let sessionIndex = Sessions.indexOf(index)
+        Sessions.splice(sessionIndex, 1)
+        
+        //refreshing the state
+        let newSessions = [...Sessions]
+        this.setState({Sessions: newSessions})
     }
 
     render() {
@@ -140,10 +164,10 @@ class CreateSessionModel extends React.Component {
                                 </Col>
                             </Form.Row>
                         </Col>
-                        <Col lg="5">
+                        <Col lg="5" className="MapSessions-container">
                             {
                                 Sessions.map((session, index) => {
-                                    return <SessionCard key={index} SessionTitle={session.SessionTitle} SessionDescription={session.SessionDescription} />
+                                    return <SessionCard key={index} SessionIndex={index} HandleDeleteSession={this.HandleDeleteSession} SessionTitle={session.SessionTitle} SessionDescription={session.SessionDescription} SessionStart={session.SessionStart} SessionEnd={session.SessionEnd} />
                                 })
                             }
                         </Col>
