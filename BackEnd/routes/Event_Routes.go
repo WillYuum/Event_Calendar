@@ -11,4 +11,6 @@ func InitEventRoute() {
 	Mux.HandleFunc("/api/latestevents", controller.HandleGetLatestEvents).Methods("GET")
 	//return a specific event by its id
 	Mux.HandleFunc("/event", controller.HandleGetEventById).Methods("GET")
+	//createEvent
+	Mux.HandleFunc("/api/createevent", controller.HandleCreateEvent).Methods("POST")
 }

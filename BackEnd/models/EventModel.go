@@ -3,20 +3,18 @@ package model
 import (
 	"fmt"
 	"log"
-	"time"
 )
 
 //Event Structure
 type Event struct {
-	EventID          int       `json:"EventId"`
-	EventName        string    `json:"EventName"`
-	EventDescription string    `json:"EventDescription"`
-	HostName         string    `json:"HostName"`
-	EventStartDate   time.Time `json:"EventStartDate"`
-	EventEndDate     time.Time `json: "EventEndDate"`
-	EventMainImage	 []byte    `json: "EventMainImage`
+	EventID          int    `json:"EventId"`
+	EventName        string `json:"EventName"`
+	EventDescription string `json:"EventDescription"`
+	HostName         string `json:"HostName"`
+	EventStartDate   string `json:"EventStartDate"`
+	EventEndDate     string `json: "EventEndDate"`
+	EventMainImage   []byte `json: "EventMainImage`
 }
-
 
 //array to store Event data
 type Events struct {
@@ -60,7 +58,7 @@ func GetEvents() Events {
 }
 
 //retrieves events that are after today's current date
-func GetLatestEvents() Events{
+func GetLatestEvents() Events {
 	//initialized var with array empty array of type Events
 	events := Events{}
 
@@ -97,14 +95,13 @@ func GetLatestEvents() Events{
 	return events
 }
 
-func GetEventById(EventId int)Event{
+func GetEventById(EventId int) Event {
 	//query to get event depending on  event id
 	sqlStmt := `SELECT "EventId", "EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate",(SELECT "Image" FROM public."EventImage" WHERE "Event"."EventId" = "EventImage"."EventId" limit 1) 
 	FROM public."Event" WHERE "EventId" = $1`
 
 	//retrieving data from database
 	row := db.QueryRow(sqlStmt, EventId)
-	
 
 	//creating structure for variable and adding the row value to it
 	event := Event{}
@@ -116,19 +113,18 @@ func GetEventById(EventId int)Event{
 		&event.EventStartDate,
 		&event.EventEndDate,
 		&event.EventMainImage,
-
 	)
 
 	return event
 }
 
-func CreateEvent(EventName string, EventDescription string, HostName string, EventStartDate time.Time, EventEndDate time.Time) {
+func CreateEvent(event Event) {
 
 	sqlStmt := `INSERT INTO public."Event"(
 		"EventName", "EventDescription", "HostName", "EventStartDate", "EventEndDate")
 		VALUES ($1, $2, $3, $4, $5);`
 
-	_, err := db.Query(sqlStmt, EventName, EventDescription, HostName, EventStartDate, EventEndDate)
+	_, err := db.Query(sqlStmt, event.EventName, event.EventDescription, event.HostName, event.EventStartDate, event.EventEndDate)
 	if err != nil {
 		log.Fatal(err)
 	} else {

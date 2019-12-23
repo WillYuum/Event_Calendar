@@ -29,7 +29,7 @@ func HandleGetEvent(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "%s", data)
 }
 
-func HandleGetLatestEvents(w http.ResponseWriter, r *http.Request){
+func HandleGetLatestEvents(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	//giving type to events var
@@ -47,8 +47,7 @@ func HandleGetLatestEvents(w http.ResponseWriter, r *http.Request){
 	fmt.Fprintf(w, "%s", data)
 }
 
-
-func HandleGetEventById(w http.ResponseWriter, r *http.Request){
+func HandleGetEventById(w http.ResponseWriter, r *http.Request) {
 	utils.EnableCors(&w)
 
 	//retrieving the event id and changing it to integer
@@ -66,4 +65,18 @@ func HandleGetEventById(w http.ResponseWriter, r *http.Request){
 
 	// //sending the events data to the client side
 	fmt.Fprintf(w, "%s", data)
+}
+
+func HandleCreateEvent(w http.ResponseWriter, r *http.Request) {
+	utils.EnableCors(&w)
+
+	var event models.Event
+
+	event.EventName = r.FormValue("EventTitle")
+	event.EventDescription = r.FormValue("EventDescription")
+	event.HostName = r.FormValue("HostName")
+	event.EventStartDate = r.FormValue("EventStartDate")
+	event.EventStartDate = r.FormValue("EventEndDate")
+
+	models.CreateEvent(event)
 }
