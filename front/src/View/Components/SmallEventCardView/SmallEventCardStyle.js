@@ -33,7 +33,7 @@ export const SmallEventCardStyle = StyleSheet.create({
   },
 
   EventHost: {
-    fontSize: 18,
+    fontSize: 17,
     color: "gray"
   },
 

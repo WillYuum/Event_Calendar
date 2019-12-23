@@ -1,7 +1,13 @@
 import React from "react";
-import { View } from "react-native";
 
+//--------------IMPORTED COMPONENTS--------------
 import SmallEventCard from "../Components/SmallEventCardView/SamllEventCardView.js";
+//--------------IMPORTED COMPONENTS--------------
+
+//--------------IMPORTED REACT NATIVE COMPONENTS--------------
+import { View } from "react-native";
+import { TouchableNativeFeedback } from "react-native";
+//--------------IMPORTED REACT NATIVE COMPONENTS--------------
 
 //importing stylesheet file
 import { MapEventsStyle } from "./MapSmallCardEventsStyle.js";
@@ -23,7 +29,7 @@ class MapEvents extends React.Component {
   }
   render() {
     //props recieved by EventScreen Component
-    const { EventsData } = this.props;
+    const { EventsData, ...props } = this.props;
 
     //Styling variables
     const { MapEventsContainer } = MapEventsStyle;
@@ -31,15 +37,15 @@ class MapEvents extends React.Component {
       <View style={MapEventsContainer}>
         {EventsData.slice(1).map((event, index) => {
           return (
-      
-              <SmallEventCard
-                key={index}
-                Title={event.EventName}
-                Host={event.HostName}
-                EventStartDate={event.EventStartDate}
-                ImageSrc={event.EventMainImage}
-              />
-     
+            <SmallEventCard
+              key={index}
+              EventId={event.EventId}
+              Title={event.EventName}
+              Host={event.HostName}
+              EventStartDate={event.EventStartDate}
+              ImageSrc={event.EventMainImage}
+              {...props}
+            />
           );
         })}
       </View>

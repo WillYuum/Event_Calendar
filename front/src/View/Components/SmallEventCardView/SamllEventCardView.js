@@ -1,7 +1,8 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
-
 import dateformat from "dateformat";
+
+import { View, Text, Image } from "react-native";
+import { TouchableNativeFeedback } from "react-native";
 
 //importing stylesheet file
 import { SmallEventCardStyle } from "./SmallEventCardStyle.js";
@@ -34,8 +35,15 @@ class SmallEventCardView extends React.Component {
     } = SmallEventCardStyle;
 
     //props recieved from MapSmallCardEvent.js component
-    const { Title, Host, EventStartDate, ImageSrc } = this.props;
-
+    const {
+      EventId,
+      Title,
+      Host,
+      EventStartDate,
+      ImageSrc,
+      ...props
+    } = this.props;
+    console.log("event id", EventId);
     //static image
     let Image_Http_URL = {
       uri:
@@ -45,7 +53,9 @@ class SmallEventCardView extends React.Component {
     //adding the bas64 image to be able to show the image in source
     let ImageUrl = "data:image/png;base64," + ImageSrc + ";";
     return (
-      <View>
+      <TouchableNativeFeedback
+        onPress={() => props.navigation.push("Event", { EventId: EventId })}
+      >
         <View style={containerCard}>
           <View style={ImageContainer}>
             <Image
@@ -60,13 +70,13 @@ class SmallEventCardView extends React.Component {
             <Text style={EventHost}>
               by <Text style={HostNameText}>{Host}</Text>
             </Text>
-            <Text style={EventDate}>
+            <Text numberOfLines={1} style={EventDate}>
               {/*Displaying the start date (Fri, Dec 20 - 02:00 AM)*/}
               {dateformat(EventStartDate, "ddd, mmm dd - HH:MM TT")}
             </Text>
           </View>
         </View>
-      </View>
+      </TouchableNativeFeedback>
     );
   }
 }

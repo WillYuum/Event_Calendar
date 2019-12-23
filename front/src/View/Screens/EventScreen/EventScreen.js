@@ -5,12 +5,10 @@ import LatestEventCard from "../../Components/LargeEventCardView/LargeEventCardV
 import MapSmallCardEvent from "../../MapComponents/MapSmallCardEvents.js";
 //-------------------IMPORTED COMPONENTS--------------------
 
-
 //-------------------IMPORTED REACT NATIVE COMPONENTS---------------
 import { Text, View, ScrollView, Button } from "react-native";
-import { TouchableNativeFeedback, TouchableHighlight } from "react-native"
+import { TouchableNativeFeedback } from "react-native";
 //-------------------IMPORTED REACT NATIVE COMPONENTS---------------
-
 
 //importing stylesheet file
 import { EventScreenStyle } from "./EventScreenStyle.js";
@@ -66,8 +64,7 @@ class EventScreen extends React.Component {
       latestEvent = <Text>Loading...</Text>;
     }
 
-    const { ...props } = this.props
-    console.log(props)
+    const { ...props } = this.props;
     return (
       <View style={ScreenContainer}>
         <View>
@@ -79,13 +76,20 @@ class EventScreen extends React.Component {
             {/*------------------INTRO SECTION-----------------------*/}
 
             {/*---------------LATEST EVENT CARD-----------------------*/}
-            <TouchableNativeFeedback  onPress={() =>this.props.navigation.push("Event")} underlayColor='#f1c40f'  >
-              <View  style={latestEventPos}>{latestEvent}</View>
+            <TouchableNativeFeedback
+              onPress={() =>
+                this.props.navigation.push("Event", {
+                  EventId: EventsData[0].EventId
+                })
+              }
+              underlayColor="#f1c40f"
+            >
+              <View style={latestEventPos}>{latestEvent}</View>
             </TouchableNativeFeedback>
             {/*---------------LATEST EVENT CARD-----------------------*/}
 
             {/*-------------------Display all upcoming events--------------------*/}
-            <MapSmallCardEvent EventsData={EventsData} />
+            <MapSmallCardEvent EventsData={EventsData} {...props} />
             {/*-------------------Display all upcoming events--------------------*/}
           </ScrollView>
         </View>

@@ -30,7 +30,15 @@ export default class Event extends EventRecord {
     return await result;
   }
 
-  async getEventImages(){
-    
+  async getEventImages() {}
+
+  async getEventById(EventId) {
+    try {
+      const request = await fetch(`${BACKEND_URL}/event?eventid=${EventId}`);
+      const result = await request.json();
+      return await result;
+    } catch (err) {
+      throw new Error(`failed to fetch event with err = ${err}`);
+    }
   }
 }
