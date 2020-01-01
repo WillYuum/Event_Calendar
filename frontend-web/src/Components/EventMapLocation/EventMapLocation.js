@@ -17,6 +17,9 @@ class EventMapLocation extends React.Component {
     };
   }
 
+  //Adding the MapBox token to a variable from .env
+  MapBoxToken = process.env.REACT_APP_MAPBOX_TOKEN
+
   render() {
     const position = [this.state.lat, this.state.lng];
     return (
@@ -32,7 +35,7 @@ class EventMapLocation extends React.Component {
           >
           <TileLayer
             attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoid2lsbHl1bXMiLCJhIjoiY2szeWFrYTBtMDNxMjNrbjh3cXR6NmViZyJ9.THjxOxZctWlNVPcyQ6Y7Gg"
+            url={`https://api.mapbox.com/styles/v1/mapbox/streets-v9/tiles/{z}/{x}/{y}?access_token=${this.MapBoxToken}`}
           />
           <Marker position={position}>
             <Popup>

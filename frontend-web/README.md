@@ -1,3 +1,40 @@
+# WebApp
+
+## Prerequisites
+
+* Install node modules:  
+`$ npm install`
+
+* Create .env file and add the variables:
+    >To use the fetch functions in the WebApp add this  
+    >`REACT_APP_PORT=http://localhost:3001`
+    >
+    > This variable is url used for all the fetchs in the app
+
+
+    > To be able to use the custom Tile Layer that I added you need to create an account at [MapBox](https://www.mapbox.com/) and add the public Token to this variable
+    >
+    > `REACT_APP_MAPBOX_TOKEN=[MAPBOX PUBLIC TOKEN]`
+    >
+    > I used a different image to display the map using [MapBox TileLayer styles](https://docs.mapbox.com/api/#styles) 
+
+## Done
+
+> * Added Calendar  to display events using [FullCalendar](https://fullcalendar.io/) and added a feature to create events by selecting a day/multiple days and being able to click on the events that are shown it so you can learn about it's details.
+> 
+> * Created A event detail Card to display the info of the clicked event with more info button to be taken to `EventInfoPage` and see a more detailed info of the event.
+> * Used (Leafletjs)[https://leafletjs.com/] to display a static location
+
+## Not done:
+
+> *  Create Event didn't get implemented.
+>   
+> *  Displaying event Location didn't get implemented and used a custom location in `EventDetailsCard` and `EventInfoPage`.
+> * Didn't create modals for adding image and adding location while creating an event in ChainedCreateModal
+> * Not Responsive
+
+---
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
